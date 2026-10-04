@@ -6,15 +6,16 @@ Common solutions, printing best practices, and browser considerations for Harvar
 
 ## 1. How to Export the Perfect PDF
 
-When clicking **Download PDF** or pressing `Ctrl + P` / `Cmd + P`:
+### Direct One-Click PDF Download (Default)
+Simply click the **Download PDF** button in the top navigation bar.
+- Generates a clean, multi-page vector A4 PDF matching the on-screen Harvard format.
+- Directly downloads to your device without opening browser print dialogs.
+- Automatic filename based on your name (e.g., `Muhammad_Rutaab_Ali.pdf`).
 
-1. **Printer Destination:** Set to **Save as PDF** (or Microsoft Print to PDF).
-2. **Paper Size:** Select **A4** (or **US Letter** if targeting North America).
-3. **Margins:** Select **None** (or **Custom: 0**). *Crucial: Harvard CV Builder already manages internal 18mm margins.*
-4. **Options / Background Graphics:** 
-   - Uncheck **Headers and Footers** (prevents the browser from adding the URL and print timestamp).
-   - Toggling **Background graphics** on or off does not alter text, but leaving it **Off** keeps the document pure vector text.
-5. **Scale:** Ensure scaling is set to **Default (100%)**.
+### Physical Hardware Printing (Optional)
+If you want to send your CV to a physical printer connected to your computer:
+1. Click **More Options (⋮)** in the top bar and select **Print dialog (Hardware printer)**, or press `Ctrl + P` / `Cmd + P`.
+2. Select your printer, choose paper size **A4**, set margins to **None**, and uncheck headers/footers.
 
 ---
 

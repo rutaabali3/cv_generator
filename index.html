@@ -1320,6 +1320,27 @@ body.sidebar-collapsed .editor {
   to { transform: rotate(360deg); }
 }
 .spin-icon { animation: spin-icon 1s linear infinite; }
+
+/* Direct PDF Export Rules */
+body.is-exporting-pdf #cv {
+  transform: none !important;
+  gap: 0 !important;
+}
+body.is-exporting-pdf .cv-page {
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+body.is-exporting-pdf .editable {
+  outline: none !important;
+  background: transparent !important;
+}
+body.is-exporting-pdf .editable:hover {
+  outline: none !important;
+  background: transparent !important;
+}
+body.is-exporting-pdf .empty-ph {
+  display: none !important;
+}
   
 /* =========================================================
    SweetAlert2 Material Design 3 (MD3) Dialog Styling
@@ -1508,7 +1529,20 @@ body.swal2-toast-shown .swal2-container.swal2-backdrop-show {
 
   </style>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+  <script src="libs/html2canvas.min.js"></script>
+  <script src="libs/jspdf.umd.min.js"></script>
+  <script>
+    if (typeof html2canvas === 'undefined') {
+      const s1 = document.createElement('script');
+      s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+      document.head.appendChild(s1);
+    }
+    if (typeof jspdf === 'undefined' && typeof jsPDF === 'undefined') {
+      const s2 = document.createElement('script');
+      s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+      document.head.appendChild(s2);
+    }
+  </script>
 </head>
 <body>
 
@@ -1557,6 +1591,10 @@ body.swal2-toast-shown .swal2-container.swal2-backdrop-show {
           Load .json file
           <input id="input-import-json" type="file" accept="application/json" hidden />
         </label>
+        <button id="btn-browser-print" class="md-menu-item" type="button">
+          <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+          Print dialog (Hardware printer)
+        </button>
         <div style="height:1px; background:var(--md-sys-color-outline-variant); margin:4px 0;"></div>
         <button id="btn-clear" class="md-menu-item" type="button" style="color:var(--md-sys-color-error)">
           <svg viewBox="0 0 24 24" style="fill:var(--md-sys-color-error)"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
@@ -1848,7 +1886,7 @@ body.swal2-toast-shown .swal2-container.swal2-backdrop-show {
         <ul style="font-size:13px; color:var(--md-sys-color-on-surface-variant); padding-left:18px; line-height:1.6;">
           <li><b>Direct Editing:</b> Click directly on the document preview to edit text.</li>
           <li><b>Action Verbs:</b> Start each bullet with a past-tense action verb (e.g. <i>Engineered</i>, <i>Spearheaded</i>, <i>Generated</i>).</li>
-          <li><b>Print Setup:</b> In the print dialog, select <b>Margins: None</b> and disable headers/footers for a pixel-perfect A4 PDF.</li>
+          <li><b>Direct PDF Download:</b> Click <b>Download PDF</b> in the top bar to immediately save a pixel-perfect, multi-page vector PDF ready for job applications.</li>
         </ul>
       </div>
     </div>
@@ -3273,72 +3311,91 @@ $("#btn-print").addEventListener("click", async () => {
   const btn = $("#btn-print");
   const origHTML = btn.innerHTML;
   btn.disabled = true;
-  btn.innerHTML = `<svg viewBox="0 0 24 24" class="spin-icon"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1-.25 1.94-.68 2.77l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1 .25-1.94.68-2.77l-1.46-1.46C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg> Generating…`;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" class="spin-icon"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1-.25 1.94-.68 2.77l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1 .25-1.94.68-2.77l-1.46-1.46C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg> Generating PDF…`;
 
-  // Hide placeholders
-  $$(".empty-ph").forEach(n => n.textContent = "");
+  // Remove focus from any active editable field to avoid caret/highlight in capture
+  if (document.activeElement && typeof document.activeElement.blur === "function") {
+    document.activeElement.blur();
+  }
+
+  // Hide floating selection toolbar
+  const fToolbar = $("#floating-toolbar");
+  if (fToolbar) fToolbar.style.display = "none";
+
+  const cvEl = $("#cv");
+  const prevTransform = cvEl.style.transform;
 
   try {
-    const pages = $$(".cv-page");
-    if (!pages.length) { alert("Nothing to download."); return; }
+    const pages = $$(".cv-page", cvEl);
+    if (!pages.length) {
+      alert("No CV content found to download.");
+      return;
+    }
 
-    // Build a temporary container with cloned pages for PDF generation
-    const container = document.createElement("div");
-    container.style.cssText = "position:absolute; left:-99999px; top:0;";
+    // Reset preview zoom to 1:1 & activate clean export styles
+    cvEl.style.transform = "none";
+    document.body.classList.add("is-exporting-pdf");
 
-    pages.forEach((page, i) => {
-      const clone = page.cloneNode(true);
-      clone.style.cssText = `
-        width: 210mm; height: 297mm;
-        box-shadow: none; margin: 0; transform: none;
-        overflow: hidden; box-sizing: border-box;
-        background: #ffffff;
-      `;
-      // Remove editable outlines/highlights
-      clone.querySelectorAll(".editable").forEach(el => {
-        el.removeAttribute("contenteditable");
-        el.style.outline = "none";
-        el.style.background = "transparent";
-      });
-      // Add page break between pages (not after the last one)
-      if (i < pages.length - 1) {
-        clone.style.pageBreakAfter = "always";
-      }
-      container.appendChild(clone);
+    // Wait for OpenType / web fonts to finish layout rendering
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+    await new Promise(r => setTimeout(r, 80));
+
+    const jsPDFClass = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
+    if (!jsPDFClass || !window.html2canvas) {
+      throw new Error("PDF export engine not loaded. Please verify script assets.");
+    }
+
+    const pdf = new jsPDFClass({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+      compress: true
     });
 
-    document.body.appendChild(container);
+    const pdfW = 210;
+    const pdfH = 297;
 
-    const fileName = (state.personal.name || "cv").replace(/[^\w\d]+/g, "-").toLowerCase() + ".pdf";
+    for (let i = 0; i < pages.length; i++) {
+      const pageEl = pages[i];
 
-    await html2pdf().set({
-      margin: 0,
-      filename: fileName,
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: {
-        scale: 2,
+      // High-resolution canvas render (scale 2.5 gives ~240 DPI razor-sharp print clarity)
+      const canvas = await html2canvas(pageEl, {
+        scale: 2.5,
         useCORS: true,
         allowTaint: true,
         backgroundColor: "#ffffff",
         logging: false,
-      },
-      jsPDF: {
-        unit: "mm",
-        format: "a4",
-        orientation: "portrait",
-      },
-      pagebreak: { mode: ["css"], avoid: [] },
-    }).from(container).save();
+        scrollX: 0,
+        scrollY: 0
+      });
 
-    document.body.removeChild(container);
+      const imgData = canvas.toDataURL("image/jpeg", 0.98);
+
+      if (i > 0) {
+        pdf.addPage("a4", "portrait");
+      }
+      pdf.addImage(imgData, "JPEG", 0, 0, pdfW, pdfH, undefined, "FAST");
+    }
+
+    // Direct browser file download: Name_CV.pdf
+    const rawName = state.personal.name || "Resume";
+    const safeName = rawName.trim().replace(/[^\w\s-]/g, "").replace(/\s+/g, "_");
+    const fileName = `${safeName || "Harvard_CV"}.pdf`;
+
+    pdf.save(fileName);
+
+    await mdToast({ title: "PDF downloaded directly!", icon: "success" });
 
   } catch (err) {
     console.error("PDF generation error:", err);
     alert("PDF generation failed: " + err.message);
   } finally {
+    cvEl.style.transform = prevTransform;
+    document.body.classList.remove("is-exporting-pdf");
     btn.disabled = false;
     btn.innerHTML = origHTML;
-    renderPreview();
   }
 });
 
@@ -3352,6 +3409,15 @@ document.addEventListener("click", (e) => {
     moreMenu.classList.remove("open");
   }
 });
+
+const browserPrintBtn = $("#btn-browser-print");
+if (browserPrintBtn) {
+  browserPrintBtn.addEventListener("click", () => {
+    moreMenu.classList.remove("open");
+    $$(".empty-ph").forEach(n => n.textContent = "");
+    window.print();
+  });
+}
 
 $("#btn-load-sample").addEventListener("click", async () => {
   moreMenu.classList.remove("open");

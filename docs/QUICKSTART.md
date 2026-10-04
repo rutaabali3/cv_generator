@@ -53,8 +53,9 @@ Right-click `index.html` in VS Code and select **Open with Live Server**.
    - Open **Bullet Strength Audit** to replace weak verbs and add measurable metrics.
    - Open **Job Matcher**, paste the target job description, and view your match percentage and keyword gaps.
 6. **Export Your CV:**
-   - Click the **Download PDF** button.
-   - In your browser's print dialog, choose **Save as PDF**, set margins to **None**, and ensure background graphics are toggled off.
+   - Click the **Download PDF** button in the top bar.
+   - A multi-page, high-resolution `.pdf` file downloads directly to your device, matching the screen preview exactly.
+   - For hardware printing to a physical printer, select **More (⋮) > Print dialog (Hardware printer)**.
 
 ---
 
