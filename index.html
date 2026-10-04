@@ -1,0 +1,3722 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Harvard CV Builder — Material Design 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* =========================================================
+   Harvard CV Builder — Google Material Design 3 (MD3)
+   ========================================================= */
+
+:root {
+  /* MD3 Light Color Tokens */
+  --md-sys-color-primary: #0b57d0;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #d3e3fd;
+  --md-sys-color-on-primary-container: #041e49;
+  --md-sys-color-primary-hover: #0842a0;
+
+  --md-sys-color-secondary: #00639b;
+  --md-sys-color-secondary-container: #c2e7ff;
+  --md-sys-color-on-secondary-container: #001d35;
+
+  --md-sys-color-tertiary: #006874;
+  --md-sys-color-tertiary-container: #d8f1ec;
+  --md-sys-color-on-tertiary-container: #002024;
+
+  --md-sys-color-surface: #f8fafd;
+  --md-sys-color-surface-dim: #d8dadf;
+  --md-sys-color-surface-bright: #f8fafd;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f0f4f9;
+  --md-sys-color-surface-container: #e9eef6;
+  --md-sys-color-surface-container-high: #e1e7f0;
+  --md-sys-color-surface-container-highest: #d8e2ee;
+
+  --md-sys-color-on-surface: #1f1f1f;
+  --md-sys-color-on-surface-variant: #444746;
+  --md-sys-color-outline: #747775;
+  --md-sys-color-outline-variant: #c4c7c5;
+
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410e0b;
+
+  --md-sys-color-success: #146c2e;
+  --md-sys-color-success-container: #c4eed0;
+  --md-sys-color-on-success-container: #072711;
+
+  /* MD3 Elevations */
+  --md-elevation-1: 0 1px 3px 1px rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  --md-elevation-2: 0 2px 6px 2px rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+  --md-elevation-3: 0 4px 12px 3px rgba(0, 0, 0, 0.09), 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+
+  /* MD3 Shapes */
+  --md-shape-sm: 8px;
+  --md-shape-md: 12px;
+  --md-shape-lg: 16px;
+  --md-shape-xl: 24px;
+  --md-shape-full: 9999px;
+
+  --sidebar-w: 480px;
+}
+
+@font-face{
+  font-family:"Latin Modern Roman";
+  src: url("fonts/LMRoman10-Regular.otf") format("opentype");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Latin Modern Roman";
+  src: url("fonts/LMRoman10-Bold.otf") format("opentype");
+  font-weight:700; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Latin Modern Roman";
+  src: url("fonts/LMRoman10-Italic.otf") format("opentype");
+  font-weight:400; font-style:italic; font-display:swap;
+}
+@font-face{
+  font-family:"Latin Modern Roman";
+  src: url("fonts/LMRoman10-BoldItalic.otf") format("opentype");
+  font-weight:700; font-style:italic; font-display:swap;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* MD3 Standard SVG Icons */
+.md-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -3px;
+  flex-shrink: 0;
+}
+.md-card-title .md-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--md-sys-color-primary);
+  margin-right: 2px;
+}
+.sec-type-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--md-sys-color-primary);
+}
+.sec-type-icon .md-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.md-assist-chip .md-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.md-assist-chip:hover .md-icon {
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* ---------------- Top App Bar (MD3) ---------------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 20px;
+  height: 64px;
+  background: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  flex: 0 0 auto;
+  z-index: 30;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-on-surface);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--md-shape-full);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex: none;
+  transition: background 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+.icon-btn:hover { background: rgba(0, 0, 0, 0.06); }
+.icon-btn:active { background: rgba(0, 0, 0, 0.12); }
+.icon-btn svg { width: 22px; height: 22px; fill: currentColor; }
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0b57d0, #1f6feb);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(11, 87, 208, 0.25);
+}
+.brand-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  letter-spacing: -0.2px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+/* MD3 Buttons */
+.md-btn {
+  appearance: none;
+  border: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: var(--md-shape-full);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  user-select: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.md-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+.md-btn-filled {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  box-shadow: var(--md-elevation-1);
+}
+.md-btn-filled:hover {
+  background: var(--md-sys-color-primary-hover);
+  box-shadow: var(--md-elevation-2);
+}
+.md-btn-filled:active { box-shadow: var(--md-elevation-1); }
+
+.md-btn-tonal {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.md-btn-tonal:hover {
+  background: #b1ddfa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.md-btn-outlined {
+  background: transparent;
+  color: var(--md-sys-color-primary);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+.md-btn-outlined:hover {
+  background: rgba(11, 87, 208, 0.06);
+  border-color: var(--md-sys-color-primary);
+}
+
+.md-btn-text {
+  background: transparent;
+  color: var(--md-sys-color-primary);
+  padding: 0 12px;
+}
+.md-btn-text:hover { background: rgba(11, 87, 208, 0.08); }
+
+.md-btn-danger {
+  background: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+  border: 1px solid #fecaca;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.md-btn-danger:hover {
+  background: #fca5a5;
+  color: #450a0a;
+  border-color: #f87171;
+  box-shadow: 0 2px 5px rgba(186, 26, 26, 0.18);
+}
+.md-btn-danger:active {
+  background: #f87171;
+  color: #ffffff;
+}
+
+/* Dropdown Menu (MD3) */
+.menu-anchor { position: relative; }
+.md-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--md-sys-color-surface-container-lowest);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-md);
+  box-shadow: var(--md-elevation-2);
+  z-index: 100;
+  min-width: 190px;
+  padding: 6px 0;
+  flex-direction: column;
+}
+.md-menu.open { display: flex; }
+.md-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+  width: 100%;
+}
+.md-menu-item:hover { background: var(--md-sys-color-surface-container-low); }
+.md-menu-item svg { width: 18px; height: 18px; fill: var(--md-sys-color-on-surface-variant); }
+
+/* ---------------- Layout ---------------- */
+.layout {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  position: relative;
+}
+
+/* Sidebar Editor */
+.editor {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 var(--sidebar-w);
+  width: var(--sidebar-w);
+  min-height: 0;
+  background: var(--md-sys-color-surface);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+  overflow: hidden;
+  transition: flex-basis 0.25s cubic-bezier(0.2, 0, 0, 1), width 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+body.sidebar-collapsed .editor {
+  flex-basis: 0;
+  width: 0;
+  border-right-color: transparent;
+}
+
+/* MD3 Primary Tabs */
+.md3-tabs {
+  display: flex;
+  background: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  padding: 0 8px;
+}
+.md3-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 58px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  color: var(--md-sys-color-on-surface-variant);
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  padding: 0 6px;
+}
+.md3-tab:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--md-sys-color-on-surface);
+}
+.md3-tab.active {
+  color: var(--md-sys-color-primary);
+}
+.md3-tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.md3-tab-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+.md3-tab-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+.md3-tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: transparent;
+  transition: background 0.2s;
+}
+.md3-tab.active .md3-tab-indicator {
+  background: var(--md-sys-color-primary);
+}
+
+.md3-badge {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  background: var(--md-sys-color-error);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: var(--md-shape-full);
+}
+
+/* Tab Panels */
+.tab-content {
+  display: none;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+}
+.tab-content.active { display: block; }
+
+/* MD3 Cards */
+.md-card {
+  background: var(--md-sys-color-surface-container-lowest);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-lg);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s;
+}
+.md-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.md-card-title-wrap { flex: 1; }
+.md-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.1px;
+}
+.md-card-subtitle {
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-top: 3px;
+}
+
+/* MD3 Input Fields */
+.md-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+  min-width: 0;
+}
+.md-field:last-child { margin-bottom: 0; }
+.md-field-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: 6px;
+}
+.md-field-input, .md-field-select, .md-field-textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface);
+  background: var(--md-sys-color-surface-container-lowest);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-sm);
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.md-field-input:focus, .md-field-select:focus, .md-field-textarea:focus {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.12);
+}
+.md-field-input::placeholder, .md-field-textarea::placeholder {
+  color: #9aa0a6;
+}
+
+.md-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+  min-width: 0;
+}
+.md-grid-2:last-child { margin-bottom: 0; }
+
+/* Expandable / Collapsible Details */
+.md-collapsible {
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-md);
+  overflow: hidden;
+  margin-top: 14px;
+  background: var(--md-sys-color-surface-container-low);
+}
+.md-collapsible-summary {
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--md-sys-color-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.md-collapsible-summary:hover { background: rgba(0, 0, 0, 0.02); }
+.md-collapsible-summary svg { width: 18px; height: 18px; fill: currentColor; transition: transform 0.2s; }
+.md-collapsible[open] .md-collapsible-summary svg { transform: rotate(180deg); }
+.md-collapsible-content {
+  padding: 16px;
+  background: var(--md-sys-color-surface-container-lowest);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+/* Section Add Chips */
+.add-section-chips-wrap {
+  margin-bottom: 16px;
+}
+.chips-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: 8px;
+  display: block;
+}
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.md-assist-chip {
+  appearance: none;
+  background: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-sm);
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
+  user-select: none;
+}
+.md-assist-chip:hover {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-color: #a4d2f5;
+  transform: translateY(-1px);
+}
+.md-assist-chip:active { transform: translateY(0); }
+
+/* Section Cards */
+.section-list { display: flex; flex-direction: column; gap: 12px; }
+.section-card {
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-md);
+  background: var(--md-sys-color-surface-container-lowest);
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+.section-card.open {
+  box-shadow: var(--md-elevation-1);
+  border-color: #a4c2f5;
+  margin: 2px 0;
+}
+.section-card.dragging {
+  opacity: 0.4;
+  border-style: dashed;
+}
+.section-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--md-sys-color-surface-container-low);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.section-card-header:hover {
+  background: var(--md-sys-color-surface-container);
+}
+.section-card.open .section-card-header {
+  background: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+.sec-count-badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+  background: var(--md-sys-color-surface-container-high);
+  padding: 2px 8px;
+  border-radius: var(--md-shape-full);
+  white-space: nowrap;
+  letter-spacing: 0.1px;
+  pointer-events: none;
+}
+.section-card.open .sec-count-badge {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.drag-grip {
+  display: flex;
+  align-items: center;
+  color: var(--md-sys-color-outline);
+  cursor: grab;
+}
+.drag-grip svg { width: 18px; height: 18px; fill: currentColor; }
+
+.sec-type-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.sec-title-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  outline: none;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.sec-title-input:focus {
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+}
+
+.sec-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.sec-toggle-btn {
+  appearance: none;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background: #ffffff;
+  color: var(--md-sys-color-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--md-shape-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  padding: 0;
+}
+.sec-toggle-btn:hover {
+  background: var(--md-sys-color-primary-container);
+  border-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary-container);
+  box-shadow: 0 2px 4px rgba(11, 87, 208, 0.18);
+}
+.sec-toggle-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+  display: block;
+}
+.section-card.open .sec-toggle-btn {
+  background: var(--md-sys-color-surface-container-high);
+  border-color: #a4c2f5;
+  color: var(--md-sys-color-primary);
+}
+.section-card.open .sec-toggle-btn svg {
+  transform: rotate(180deg);
+}
+
+.sec-del-btn {
+  appearance: none;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background: #ffffff;
+  color: var(--md-sys-color-on-surface-variant);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--md-shape-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  padding: 0;
+}
+.sec-del-btn:hover {
+  background: var(--md-sys-color-error-container);
+  border-color: #f87171;
+  color: var(--md-sys-color-error);
+  box-shadow: 0 2px 4px rgba(186, 26, 26, 0.18);
+}
+.sec-del-btn svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+  display: block;
+}
+
+.section-body {
+  display: none;
+  padding: 16px;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  background: #fff;
+}
+.section-card.open .section-body { display: flex; }
+
+/* Sub-items in Experience/Education/Projects */
+.item-card {
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-sm);
+  padding: 14px;
+  background: var(--md-sys-color-surface-container-lowest);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+.item-card .item-foot {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Skills Chips Input */
+.chips-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-sm);
+  padding: 8px;
+  background: #fff;
+}
+.chips-input:focus-within {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 2px rgba(11, 87, 208, 0.1);
+}
+.chip {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-radius: var(--md-shape-sm);
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+.chip button {
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+}
+.chip button:hover { opacity: 0.7; }
+.chips-input input {
+  flex: 1;
+  min-width: 120px;
+  border: none;
+  outline: none;
+  padding: 4px;
+  font-size: 13px;
+  background: transparent;
+  font-family: inherit;
+}
+
+/* Simple List (Certifications, Awards, Languages) */
+.simple-list { display: flex; flex-direction: column; gap: 8px; }
+.simple-list-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.simple-list-row input { flex: 1; }
+
+/* Extra Fields & Dynamic Field Pills */
+.extra-fields-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.extra-field-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  background: var(--md-sys-color-surface-container);
+  border: 1px dashed var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-sm);
+  padding: 8px 10px;
+}
+.extra-field-label-col {
+  width: 140px;
+  flex-shrink: 0;
+}
+.extra-field-val-col {
+  flex: 1;
+}
+.extra-field-del-btn {
+  background: transparent;
+  border: none;
+  color: var(--md-sys-color-error);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  margin-bottom: 2px;
+}
+.extra-field-del-btn:hover {
+  background: rgba(186, 26, 26, 0.1);
+}
+
+.item-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.add-field-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.field-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+.field-chip-pill {
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.field-chip-pill:hover {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border-color: var(--md-sys-color-primary);
+}
+.custom-add-pill {
+  border-style: dashed;
+}
+
+/* Custom Section Format Switcher */
+.custom-mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  background: var(--md-sys-color-surface-container);
+  border-radius: var(--md-shape-sm);
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-weight: 500;
+}
+.custom-mode-btn-group {
+  display: inline-flex;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.custom-mode-btn {
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border: none;
+  background: var(--md-sys-color-surface-container-lowest);
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.custom-mode-btn.active {
+  background: var(--md-sys-color-primary);
+  color: #fff;
+}
+
+
+/* ---------------- Preview Area ---------------- */
+.preview-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #dce1eb;
+  overflow: hidden;
+}
+
+.preview-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px;
+  height: 48px;
+  background: var(--md-sys-color-surface-container-lowest);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  font-size: 13px;
+  color: var(--md-sys-color-on-surface-variant);
+  user-select: none;
+}
+
+.preview-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.zoom-controls input[type="range"] {
+  width: 110px;
+  accent-color: var(--md-sys-color-primary);
+  cursor: pointer;
+}
+.zoom-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--md-shape-full);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.zoom-btn:hover { background: rgba(0,0,0,0.06); }
+.zoom-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+.preview-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.cv-pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  transform-origin: top center;
+  transition: transform 0.1s ease-out;
+}
+
+/* Harvard CV Document Styles */
+.cv-page {
+  --cv-ink: #111111;
+  --cv-muted: #333333;
+  --cv-line: #000000;
+  width: 210mm;
+  height: 297mm;
+  flex-shrink: 0;
+  background: #ffffff;
+  padding: 12mm 15mm;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  color: var(--cv-ink);
+  font-family: "Latin Modern Roman", "Times New Roman", Times, Georgia, "Nimbus Roman", serif;
+  font-size: 11pt;
+  line-height: 1.4;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.cv-page[contenteditable="true"] .editable:hover,
+.cv-page.editing .editable:hover {
+  background: #eef5ff;
+  outline: 1px dashed #9ec1ff;
+  border-radius: 3px;
+}
+.editable:focus {
+  outline: 1px solid var(--md-sys-color-primary);
+  background: #f6faff;
+  border-radius: 3px;
+}
+
+/* Header */
+.cv-header { text-align: center; margin-bottom: 10px; }
+.cv-name { font-size: 20pt; font-weight: 700; letter-spacing: 0.2px; margin: 0 0 4px; color: #111; }
+.cv-title { font-size: 10.5pt; color: var(--cv-muted); margin: 0 0 4px; font-style: italic; }
+.cv-contact { font-size: 10.5pt; color: #222; }
+.cv-contact span { white-space: nowrap; }
+.cv-contact .sep { margin: 0 7px; color: #555; }
+
+.cv-section-head {
+  text-align: center;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 11.5pt;
+  font-weight: 700;
+  border-top: 1px solid var(--cv-line);
+  border-bottom: 1px solid var(--cv-line);
+  padding: 5px 0;
+  margin: 13px 0 7px;
+}
+.cv-section-head.page-top { margin-top: 0; }
+.cv-summary { margin: 0 0 4px; white-space: pre-wrap; }
+
+.cv-item { margin-bottom: 7px; }
+.cv-item:last-child { margin-bottom: 0; }
+.cv-item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.cv-item-title-row { font-weight: 700; }
+.cv-item-sub-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.cv-item-title { font-weight: 700; }
+.cv-item-sub { font-style: normal; color: var(--cv-ink); }
+.cv-item-date { color: var(--cv-ink); font-size: 10.5pt; white-space: nowrap; }
+.cv-item-body { margin-top: 2px; white-space: pre-wrap; }
+
+.cv-skills { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.cv-skills li { font-size: 10.5pt; }
+.cv-skills li .k { font-weight: 700; }
+.cv-simple { margin: 0; padding-left: 0; list-style: none; }
+.cv-simple li { margin-bottom: 2px; }
+.cv-plain { margin: 0; white-space: pre-wrap; }
+
+/* Item Link & Metadata Badges */
+.cv-item-link {
+  font-size: 9pt;
+  font-weight: 500;
+  color: #0b57d0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.cv-item-link:hover { color: #0842a0; }
+.cv-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2px;
+  font-size: 10pt;
+  color: var(--cv-ink);
+}
+.cv-meta-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.cv-meta-k {
+  font-weight: 700;
+  color: #111;
+}
+.cv-meta-v {
+  color: var(--cv-ink);
+}
+.cv-item-loc {
+  font-style: italic;
+  color: #333;
+}
+.cv-lang-line {
+  font-size: 10.5pt;
+  line-height: 1.4;
+}
+
+.empty-ph { color: #aaa; font-style: italic; }
+
+/* Floating selection toolbar (MD3 Pill) */
+#floating-toolbar {
+  position: absolute;
+  display: none;
+  background: var(--md-sys-color-surface-container-lowest);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: var(--md-elevation-3);
+  border-radius: var(--md-shape-full);
+  padding: 4px 6px;
+  z-index: 10000;
+  align-items: center;
+  gap: 2px;
+}
+#floating-toolbar button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--md-shape-full);
+  font-weight: 600;
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  color: var(--md-sys-color-on-surface);
+}
+#floating-toolbar button:hover { background: rgba(0, 0, 0, 0.08); }
+
+/* Region Segmented Controls */
+.md-segmented {
+  display: flex;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-full);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.md-segment-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.md-segment-btn.active {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-weight: 600;
+}
+
+/* Bullet Warnings / ATS Audit Cards */
+.audit-card {
+  padding: 14px 16px;
+  border-radius: var(--md-shape-md);
+  margin-bottom: 16px;
+}
+.audit-card-success {
+  background: var(--md-sys-color-success-container);
+  color: var(--md-sys-color-on-success-container);
+  border: 1px solid #a3e2b5;
+}
+.audit-card-warning {
+  background: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+  border: 1px solid #fecaca;
+}
+.audit-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.audit-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* JD Chips */
+.jd-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.jd-chip {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--md-shape-full);
+}
+.chip-green {
+  background: var(--md-sys-color-success-container);
+  color: var(--md-sys-color-on-success-container);
+  border: 1px solid #a3e2b5;
+}
+.chip-red {
+  background: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+  border: 1px solid #fecaca;
+}
+
+/* Checklist items */
+.checklist-ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 8px 12px;
+  border-radius: var(--md-shape-sm);
+  background: var(--md-sys-color-surface-container-low);
+}
+.checklist-badge {
+  font-weight: 600;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.badge-skip { background: #fee2e2; color: #991b1b; }
+.badge-include { background: #dcfce7; color: #166534; }
+.badge-info { background: #e0f2fe; color: #075985; }
+
+/* Backdrop for Mobile */
+.sidebar-backdrop {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 18, 30, 0.45);
+  z-index: 45;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 960px) {
+  .layout { display: block; overflow: hidden; }
+  .editor {
+    position: absolute; top: 0; left: 0; bottom: 0; z-index: 50;
+    width: min(92vw, 440px); flex-basis: auto;
+    transform: translateX(0);
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
+  }
+  body.sidebar-collapsed .editor {
+    transform: translateX(-100%);
+    width: min(92vw, 440px);
+  }
+  .preview-wrap { width: 100%; height: 100%; }
+  body:not(.sidebar-collapsed) .sidebar-backdrop { display: block; opacity: 1; }
+  .actions { gap: 6px; }
+  .brand-title { display: none; }
+  .md-btn { padding: 0 14px; font-size: 13px; }
+}
+
+/* Print Rules */
+@media print {
+  @page { size: A4; margin: 0; }
+  html, body { background: #fff !important; }
+  body { display: block; height: auto; overflow: visible; }
+  .no-print { display: none !important; }
+  .layout { display: block; height: auto; }
+  .preview-wrap { background: #fff; overflow: visible; }
+  .preview-scroll { padding: 0; overflow: visible; display: block; }
+  .cv-pages { display: block; gap: 0; transform: none !important; }
+  .cv-page {
+    margin: 0 auto; box-shadow: none; transform: none !important;
+    break-after: page; page-break-after: always;
+  }
+  .cv-page:last-child { break-after: auto; page-break-after: auto; }
+  .editable:hover { background: transparent !important; outline: none !important; }
+  .cv-item-link { color: #111 !important; text-decoration: none !important; font-style: italic; }
+}
+
+/* Spin animation for PDF generation button */
+@keyframes spin-icon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spin-icon { animation: spin-icon 1s linear infinite; }
+  
+/* =========================================================
+   SweetAlert2 Material Design 3 (MD3) Dialog Styling
+   ========================================================= */
+.swal2-container {
+  z-index: 100000 !important;
+}
+/* Modal Scrim (MD3 standard solid translucent overlay - NO blur, NO backdrop-filter) */
+.swal2-container.swal2-backdrop-show, .md3-fallback-backdrop {
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* Toast containers must have NO backdrop, NO dimming, and NO blur */
+body.swal2-toast-shown .swal2-container,
+.swal2-container.swal2-bottom-end,
+.swal2-container.swal2-toast-shown {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: none !important;
+}
+body.swal2-toast-shown .swal2-container.swal2-backdrop-show {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.md3-fallback-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+}
+.md3-dialog {
+  border-radius: 28px !important;
+  background: var(--md-sys-color-surface-container-lowest, #ffffff) !important;
+  border: 1px solid var(--md-sys-color-outline-variant, #c4c7c5) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18) !important;
+  padding: 28px 24px 24px !important;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  color: var(--md-sys-color-on-surface, #1f1f1f) !important;
+  width: min(92vw, 440px) !important;
+  box-sizing: border-box !important;
+}
+.md3-dialog-title {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: var(--md-sys-color-on-surface, #1f1f1f) !important;
+  padding: 0 !important;
+  margin: 0 0 10px !important;
+  letter-spacing: -0.2px !important;
+  text-align: center !important;
+}
+.md3-dialog-body {
+  font-size: 14px !important;
+  color: var(--md-sys-color-on-surface-variant, #444746) !important;
+  line-height: 1.5 !important;
+  margin: 0 0 20px !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+.md3-dialog-input {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border: 1px solid var(--md-sys-color-outline-variant, #c4c7c5) !important;
+  border-radius: 10px !important;
+  padding: 12px 14px !important;
+  font-size: 14px !important;
+  outline: none !important;
+  margin: 6px 0 20px !important;
+  font-family: inherit !important;
+  color: var(--md-sys-color-on-surface, #1f1f1f) !important;
+  background: #ffffff !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+.md3-dialog-input:focus {
+  border-color: var(--md-sys-color-primary, #0b57d0) !important;
+  box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.15) !important;
+}
+.md3-dialog-actions {
+  display: flex !important;
+  gap: 10px !important;
+  justify-content: flex-end !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+.md3-dialog-confirm {
+  margin: 0 !important;
+}
+.md3-dialog-cancel {
+  margin: 0 !important;
+}
+/* Modal Dialog Icons (Centered, with bottom spacing) */
+.swal2-popup:not(.swal2-toast) .swal2-icon {
+  margin: 0 auto 16px !important;
+}
+.swal2-icon.swal2-warning {
+  border-color: #f59e0b !important;
+  color: #d97706 !important;
+}
+.swal2-icon.swal2-error {
+  border-color: #ba1a1a !important;
+  color: #ba1a1a !important;
+}
+.swal2-icon.swal2-success {
+  border-color: #059669 !important;
+  color: #059669 !important;
+}
+.swal2-icon.swal2-info, .swal2-icon.swal2-question {
+  border-color: var(--md-sys-color-primary, #0b57d0) !important;
+  color: var(--md-sys-color-primary, #0b57d0) !important;
+}
+
+/* SweetAlert2 Toast (Light Mode MD3, perfectly aligned icon & text) */
+.swal2-popup.swal2-toast,
+.md3-toast {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  color: #1f1f1f !important;
+  border: 1px solid var(--md-sys-color-outline-variant, #c4c7c5) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  padding: 12px 18px !important;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: auto !important;
+  margin: 0 16px 16px 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+.swal2-popup.swal2-toast .swal2-icon,
+.md3-toast .swal2-icon {
+  margin: 0 !important;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+.swal2-popup.swal2-toast .swal2-icon.swal2-success [class^=swal2-success-circular-line],
+.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-fix,
+.md3-toast .swal2-icon.swal2-success [class^=swal2-success-circular-line],
+.md3-toast .swal2-icon.swal2-success .swal2-success-fix {
+  background-color: #ffffff !important;
+}
+.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring,
+.md3-toast .swal2-icon.swal2-success .swal2-success-ring {
+  border-color: rgba(5, 150, 105, 0.3) !important;
+}
+.swal2-popup.swal2-toast .swal2-title,
+.md3-toast .swal2-title {
+  color: #1f1f1f !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  align-self: center !important;
+  flex: 1 1 auto !important;
+}
+.swal2-popup.swal2-toast .swal2-timer-progress-bar,
+.md3-toast .swal2-timer-progress-bar {
+  background: var(--md-sys-color-primary, #0b57d0) !important;
+  height: 3px !important;
+}
+.swal2-show-md3 {
+  animation: md3DialogIn 0.2s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+.swal2-hide-md3 {
+  animation: md3DialogOut 0.15s cubic-bezier(0.9, 0.1, 1, 0.2) forwards;
+}
+@keyframes md3DialogIn {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes md3DialogOut {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.92); opacity: 0; }
+}
+
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- TOP APP BAR -->
+<header class="topbar no-print">
+  <div class="brand">
+    <button id="btn-toggle-sidebar" class="icon-btn" type="button" aria-label="Toggle editor drawer" title="Toggle editor">
+      <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+    </button>
+    <div class="brand-badge">
+      <div class="brand-logo">H</div>
+      <span class="brand-title">Harvard CV Builder</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <!-- Active Profile Quick Pill -->
+    <button id="topbar-profile-btn" class="md-btn md-btn-tonal" type="button" title="Current profile">
+      <svg viewBox="0 0 24 24" class="md-icon"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <span id="topbar-profile-name">My CV</span>
+    </button>
+
+    <!-- Load Sample Action -->
+    <button id="btn-load-sample" class="md-btn md-btn-outlined" type="button" title="Load sample Muhammad Rutaab Ali CV">
+      Sample
+    </button>
+
+    <!-- Download PDF (Primary Action) -->
+    <button id="btn-print" class="md-btn md-btn-filled" type="button">
+      <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+      Download PDF
+    </button>
+
+    <!-- More Options Menu -->
+    <div class="menu-anchor">
+      <button id="btn-more-menu" class="icon-btn" type="button" aria-label="More options" title="More options">
+        <svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+      </button>
+      <div id="more-menu" class="md-menu">
+        <button id="btn-export-json" class="md-menu-item" type="button">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Save .json file
+        </button>
+        <label class="md-menu-item" style="cursor:pointer">
+          <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+          Load .json file
+          <input id="input-import-json" type="file" accept="application/json" hidden />
+        </label>
+        <div style="height:1px; background:var(--md-sys-color-outline-variant); margin:4px 0;"></div>
+        <button id="btn-clear" class="md-menu-item" type="button" style="color:var(--md-sys-color-error)">
+          <svg viewBox="0 0 24 24" style="fill:var(--md-sys-color-error)"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+          Clear all fields
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN LAYOUT -->
+<main class="layout no-print">
+  <!-- SIDEBAR EDITOR -->
+  <section class="editor" aria-label="Editor Drawer">
+    <!-- MD3 Navigation Tabs -->
+    <nav class="md3-tabs" role="tablist">
+      <button class="md3-tab active" data-tab="tab-edit" role="tab" type="button">
+        <div class="md3-tab-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        </div>
+        <span class="md3-tab-label">Content</span>
+        <div class="md3-tab-indicator"></div>
+      </button>
+
+      <button class="md3-tab" data-tab="tab-settings" role="tab" type="button">
+        <div class="md3-tab-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
+        <span class="md3-tab-label">Profiles & Region</span>
+        <div class="md3-tab-indicator"></div>
+      </button>
+
+      <button class="md3-tab" data-tab="tab-tools" role="tab" type="button">
+        <div class="md3-tab-icon">
+          <svg viewBox="0 0 24 24"><path d="m19 9 1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"/></svg>
+          <span class="md3-badge" id="tools-badge" style="display:none">0</span>
+        </div>
+        <span class="md3-tab-label">ATS & Audit</span>
+        <div class="md3-tab-indicator"></div>
+      </button>
+    </nav>
+
+    <!-- TAB 1: CONTENT -->
+    <div class="tab-content active" id="tab-edit">
+      <!-- Personal Details Card -->
+      <div class="md-card">
+        <div class="md-card-header">
+          <div class="md-card-title-wrap">
+            <h2 class="md-card-title"><svg viewBox="0 0 24 24" class="md-icon"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Personal Details</h2>
+            <p class="md-card-subtitle">Your contact and header details on the CV</p>
+          </div>
+        </div>
+
+        <div class="md-field">
+          <label class="md-field-label">Full Name</label>
+          <input class="md-field-input" data-field="name" type="text" placeholder="e.g. Muhammad Rutaab Ali" />
+        </div>
+
+        <div class="md-field">
+          <label class="md-field-label">Target Role / Professional Title</label>
+          <input class="md-field-input" data-field="title" type="text" placeholder="e.g. Web Developer · E-commerce & SEO Specialist" />
+        </div>
+
+        <div class="md-grid-2">
+          <div class="md-field">
+            <label class="md-field-label">Email</label>
+            <input class="md-field-input" data-field="email" type="email" placeholder="name@example.com" />
+          </div>
+          <div class="md-field">
+            <label class="md-field-label">Phone Number</label>
+            <input class="md-field-input" data-field="phone" type="text" placeholder="+92 319 2342358" />
+          </div>
+        </div>
+
+        <!-- Additional Contact Details Accordion -->
+        <details class="md-collapsible">
+          <summary class="md-collapsible-summary">
+            <span>Additional Contact & Social Links</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </summary>
+          <div class="md-collapsible-content">
+            <div class="md-grid-2">
+              <div class="md-field">
+                <label class="md-field-label">Location / City</label>
+                <input class="md-field-input" data-field="location" type="text" placeholder="Karachi, Pakistan" />
+              </div>
+              <div class="md-field">
+                <label class="md-field-label">Date of Birth (Optional)</label>
+                <input class="md-field-input" data-field="dob" type="text" placeholder="e.g. 15 Jan 1998" />
+              </div>
+            </div>
+
+            <div class="md-grid-2">
+              <div class="md-field">
+                <label class="md-field-label">Nationality (Optional)</label>
+                <input class="md-field-input" data-field="nationality" type="text" placeholder="e.g. Pakistani" />
+              </div>
+              <div class="md-field">
+                <label class="md-field-label">LinkedIn / Website</label>
+                <input class="md-field-input" data-field="website" type="text" placeholder="linkedin.com/in/username" />
+              </div>
+            </div>
+
+            <div class="md-grid-2">
+              <div class="md-field">
+                <label class="md-field-label">GitHub</label>
+                <input class="md-field-input" data-field="github" type="text" placeholder="github.com/username" />
+              </div>
+              <div class="md-field">
+                <label class="md-field-label">Other Portfolio Link</label>
+                <input class="md-field-input" data-field="other" type="text" placeholder="behance.net/username" />
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Sections Card -->
+      <div class="md-card">
+        <div class="md-card-header">
+          <div class="md-card-title-wrap">
+            <h2 class="md-card-title"><svg viewBox="0 0 24 24" class="md-icon"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg> Resume Sections</h2>
+            <p class="md-card-subtitle">Fold or unfold sections for clean spacing · Drag to reorder</p>
+          </div>
+          <button id="btn-toggle-all-sections" class="md-btn md-btn-text" type="button" style="height:32px; font-size:12px; padding:0 10px;" title="Fold or unfold all sections">
+            Expand All
+          </button>
+        </div>
+
+        <!-- 1-Click Add Section Assist Chips -->
+        <div class="add-section-chips-wrap">
+          <span class="chips-label">Quick Add Section</span>
+                    <div class="chips-row">
+            <button class="md-assist-chip" type="button" data-add-sec="summary">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              + Summary
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="experience">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+              + Experience
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="education">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+              + Education
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="projects">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="m9.4 16.6 4.6-4.6-4.6-4.6L10.8 6l6 6-6 6-1.4-1.4zm-4.8 0 4.6-4.6-4.6-4.6L6 6l6 6-6 6-1.4-1.4z"/></svg>
+              + Projects
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="skills">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1l-1 7h3.51c.4 0 .62.19.4.66C13.25 16.03 11 21 11 21z"/></svg>
+              + Skills
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="certifications">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="m12 1 3.09 3.09 4.37.52.52 4.37 3.09 3.09-3.09 3.09-.52 4.37-4.37.52L12 23l-3.09-3.09-4.37-.52-.52-4.37-3.09-3.09 3.09-3.09.52-4.37 4.37-.52L12 1zm-1.05 15.42 6.07-6.07-1.41-1.41-4.66 4.66-2.54-2.54-1.41 1.41 3.95 3.95z"/></svg>
+              + Certs
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="awards">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+              + Awards
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="languages">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+              + Languages
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="publications">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+              + Publications
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="leadership">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              + Leadership
+            </button>
+            <button class="md-assist-chip" type="button" data-add-sec="custom">
+              <svg viewBox="0 0 24 24" class="md-icon"><path d="M16 9V4l1 0c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1l1 0v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg>
+              + Custom
+            </button>
+          </div>
+        </div>
+
+        <!-- Section Cards List -->
+        <div id="section-list" class="section-list"></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: PROFILES & REGION -->
+    <div class="tab-content" id="tab-settings">
+      <!-- CV Profiles Card -->
+      <div class="md-card">
+        <div class="md-card-header">
+          <div class="md-card-title-wrap">
+            <h2 class="md-card-title"><svg viewBox="0 0 24 24" class="md-icon"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Saved CV Profiles</h2>
+            <p class="md-card-subtitle">Create multiple versions for different applications</p>
+          </div>
+        </div>
+
+        <div class="md-field">
+          <label class="md-field-label">Active CV Profile</label>
+          <select id="profile-select" class="md-field-select" aria-label="Select CV Profile"></select>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
+          <button id="btn-profile-new" class="md-btn md-btn-filled" type="button" style="flex:1;">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            New
+          </button>
+          <button id="btn-profile-dup" class="md-btn md-btn-tonal" type="button" style="flex:1;">
+            <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:currentColor;"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            Duplicate
+          </button>
+          <button id="btn-profile-rename" class="md-btn md-btn-outlined" type="button" style="flex:1;">
+            <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:currentColor;"><path d="m14.06 9.02.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
+            Rename
+          </button>
+          <button id="btn-profile-del" class="md-btn md-btn-danger" type="button" style="flex:1;">
+            <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- Regional HR Standards -->
+      <div class="md-card">
+        <div class="md-card-header">
+          <div class="md-card-title-wrap">
+            <h2 class="md-card-title"><svg viewBox="0 0 24 24" class="md-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg> Regional Standards & Rules</h2>
+            <p class="md-card-subtitle">Tailor required fields based on job destination</p>
+          </div>
+        </div>
+
+        <!-- Segmented Button for Region -->
+        <div class="md-segmented" role="group">
+          <button class="md-segment-btn active" id="seg-reg-us" type="button">US / UK / Europe (Strict)</button>
+          <button class="md-segment-btn" id="seg-reg-asia" type="button">South Asia / Gulf (Expected)</button>
+        </div>
+        <select id="region-select" style="display:none">
+          <option value="us">US / UK / Europe</option>
+          <option value="asia">South Asia / Gulf</option>
+        </select>
+
+        <ul class="checklist-ul" id="checklist-items"></ul>
+      </div>
+    </div>
+
+    <!-- TAB 3: ATS & AUDIT -->
+    <div class="tab-content" id="tab-tools">
+      <!-- Bullet Strength Analyzer -->
+      <div class="md-card">
+        <div class="md-card-header">
+          <div class="md-card-title-wrap">
+            <h2 class="md-card-title"><svg viewBox="0 0 24 24" class="md-icon"><path d="M20 3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg> Bullet Strength Audit</h2>
+            <p class="md-card-subtitle">Checks for action verbs and quantifiable metrics</p>
+          </div>
+        </div>
+
+        <div id="bullet-warnings-panel">
+          <div id="bullet-audit-content"></div>
+        </div>
+      </div>
+
+      <!-- Job Description Matcher -->
+      <div class="md-card">
+        <div class="md-card-header">
+          <div class="md-card-title-wrap">
+            <h2 class="md-card-title"><svg viewBox="0 0 24 24" class="md-icon"><path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3-8c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"/></svg> Job Description Keyword Matcher</h2>
+            <p class="md-card-subtitle">Paste a job posting to check keyword coverage</p>
+          </div>
+        </div>
+
+        <div class="md-field">
+          <textarea id="jd-input" class="md-field-textarea" placeholder="Paste the job description or requirements here..." style="min-height:90px;"></textarea>
+        </div>
+
+        <button id="btn-jd-match" class="md-btn md-btn-tonal" type="button" style="width:100%;">
+          Analyze Keywords Against CV
+        </button>
+
+        <div id="jd-score" style="font-weight:700; font-size:15px; margin-top:12px; color:var(--md-sys-color-primary);"></div>
+        <div id="jd-chips-container" class="jd-chips"></div>
+      </div>
+
+      <!-- Harvard Formatting Tips -->
+      <div class="md-card" style="background:var(--md-sys-color-surface-container-low);">
+        <div class="md-card-header">
+          <div class="md-card-title-wrap">
+            <h2 class="md-card-title" style="font-size:14px;"><svg viewBox="0 0 24 24" class="md-icon"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg> Pro Harvard CV Tips</h2>
+          </div>
+        </div>
+        <ul style="font-size:13px; color:var(--md-sys-color-on-surface-variant); padding-left:18px; line-height:1.6;">
+          <li><b>Direct Editing:</b> Click directly on the document preview to edit text.</li>
+          <li><b>Action Verbs:</b> Start each bullet with a past-tense action verb (e.g. <i>Engineered</i>, <i>Spearheaded</i>, <i>Generated</i>).</li>
+          <li><b>Print Setup:</b> In the print dialog, select <b>Margins: None</b> and disable headers/footers for a pixel-perfect A4 PDF.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREVIEW AREA -->
+  <section class="preview-wrap" aria-label="Live Preview">
+    <div class="preview-toolbar">
+      <div class="preview-status">
+        <span class="status-pill">
+          <svg viewBox="0 0 24 24" style="width:14px; height:14px; fill:#146c2e"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Live A4 Preview (Harvard Format)
+        </span>
+      </div>
+
+      <div class="zoom-controls">
+        <button id="zoom-out-btn" class="zoom-btn" type="button" title="Zoom out">
+          <svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"/></svg>
+        </button>
+        <input id="zoom" type="range" min="50" max="130" value="85" aria-label="Zoom slider" />
+        <button id="zoom-in-btn" class="zoom-btn" type="button" title="Zoom in">
+          <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        </button>
+        <button id="zoom-fit-btn" class="md-btn md-btn-text" type="button" style="height:28px; padding:0 8px; font-size:12px;">Fit</button>
+      </div>
+    </div>
+
+    <div class="preview-scroll">
+      <div id="cv" class="cv-pages"></div>
+    </div>
+  </section>
+
+  <div id="sidebar-backdrop" class="sidebar-backdrop no-print"></div>
+</main>
+
+<!-- FLOATING SELECTION TOOLBAR -->
+<div id="floating-toolbar">
+  <button type="button" id="ft-bold" style="font-weight:bold" title="Bold">B</button>
+  <button type="button" id="ft-italic" style="font-style:italic" title="Italic">I</button>
+  <button type="button" id="ft-underline" style="text-decoration:underline" title="Underline">U</button>
+</div>
+
+<!-- COMPATIBILITY ELEMENTS (HIDDEN) -->
+<div style="display:none">
+  <select id="add-section-type">
+    <option value="summary">Summary</option>
+    <option value="experience">Experience</option>
+    <option value="education">Education</option>
+    <option value="projects">Projects</option>
+    <option value="skills">Skills</option>
+    <option value="certifications">Certifications</option>
+    <option value="awards">Awards</option>
+    <option value="languages">Languages</option>
+    <option value="custom">Custom</option>
+  </select>
+  <button id="btn-add-section"></button>
+</div>
+
+<script>
+/* =========================================================
+   Harvard CV Builder — app.js (MD3 Edition)
+   ========================================================= */
+
+
+/* =========================================================
+   Material Design 3 Modal Utilities (SweetAlert2 + Fallback)
+   ========================================================= */
+function fallbackDialog({ title = '', text = '', type = 'alert', confirmText = 'OK', cancelText = 'Cancel', inputValue = '', inputPlaceholder = '', isDanger = false } = {}){
+  return new Promise(resolve => {
+    const backdrop = document.createElement('div');
+    backdrop.className = 'md3-fallback-backdrop';
+    
+    const card = document.createElement('div');
+    card.className = 'md3-dialog swal2-show-md3';
+    
+    let html = `<h2 class="md3-dialog-title">${title}</h2><div class="md3-dialog-body">${text}</div>`;
+    if (type === 'prompt') {
+      html += `<input class="md3-dialog-input" id="md3-fb-input" value="${inputValue}" placeholder="${inputPlaceholder}" />`;
+    }
+    html += `<div class="md3-dialog-actions">`;
+    if (type === 'confirm' || type === 'prompt') {
+      html += `<button type="button" class="md-btn md-btn-outlined md3-dialog-cancel" id="md3-fb-cancel">${cancelText}</button>`;
+    }
+    html += `<button type="button" class="md-btn ${isDanger ? 'md-btn-danger' : 'md-btn-filled'} md3-dialog-confirm" id="md3-fb-confirm">${confirmText}</button></div>`;
+    
+    card.innerHTML = html;
+    backdrop.appendChild(card);
+    document.body.appendChild(backdrop);
+    
+    const inp = card.querySelector('#md3-fb-input');
+    if (inp) {
+      inp.focus();
+      inp.select();
+      inp.onkeydown = e => {
+        if (e.key === 'Enter') { cleanup(); resolve(inp.value); }
+        if (e.key === 'Escape') { cleanup(); resolve(null); }
+      };
+    }
+    
+    function cleanup(){
+      backdrop.remove();
+    }
+    
+    card.querySelector('#md3-fb-confirm').onclick = () => {
+      cleanup();
+      resolve(type === 'prompt' ? (inp ? inp.value : '') : true);
+    };
+    const cBtn = card.querySelector('#md3-fb-cancel');
+    if (cBtn) {
+      cBtn.onclick = () => {
+        cleanup();
+        resolve(type === 'prompt' ? null : false);
+      };
+    }
+  });
+}
+
+async function mdAlert({ title = 'Notice', text = '', icon = 'info', confirmText = 'OK' } = {}){
+  if (typeof Swal !== 'undefined') {
+    return Swal.fire({
+      title,
+      text,
+      icon,
+      confirmButtonText: confirmText,
+      customClass: {
+        popup: 'md3-dialog',
+        title: 'md3-dialog-title',
+        htmlContainer: 'md3-dialog-body',
+        confirmButton: 'md-btn md-btn-filled md3-dialog-confirm',
+        actions: 'md3-dialog-actions'
+      },
+      buttonsStyling: false,
+      showClass: { popup: 'swal2-show-md3' },
+      hideClass: { popup: 'swal2-hide-md3' }
+    });
+  }
+  return fallbackDialog({ title, text, type: 'alert', confirmText });
+}
+
+async function mdConfirm({ title = 'Confirm Action', text = '', icon = 'warning', confirmText = 'Confirm', cancelText = 'Cancel', isDanger = false } = {}){
+  if (typeof Swal !== 'undefined') {
+    const res = await Swal.fire({
+      title,
+      text,
+      icon,
+      showCancelButton: true,
+      confirmButtonText: confirmText,
+      cancelButtonText: cancelText,
+      customClass: {
+        popup: 'md3-dialog',
+        title: 'md3-dialog-title',
+        htmlContainer: 'md3-dialog-body',
+        confirmButton: isDanger ? 'md-btn md-btn-danger md3-dialog-confirm' : 'md-btn md-btn-filled md3-dialog-confirm',
+        cancelButton: 'md-btn md-btn-outlined md3-dialog-cancel',
+        actions: 'md3-dialog-actions'
+      },
+      buttonsStyling: false,
+      showClass: { popup: 'swal2-show-md3' },
+      hideClass: { popup: 'swal2-hide-md3' }
+    });
+    return res.isConfirmed;
+  }
+  return fallbackDialog({ title, text, type: 'confirm', confirmText, cancelText, isDanger });
+}
+
+async function mdPrompt({ title = 'Input Required', text = '', inputValue = '', inputPlaceholder = '', confirmText = 'Save', cancelText = 'Cancel' } = {}){
+  if (typeof Swal !== 'undefined') {
+    const res = await Swal.fire({
+      title,
+      text,
+      input: 'text',
+      inputValue,
+      inputPlaceholder,
+      showCancelButton: true,
+      confirmButtonText: confirmText,
+      cancelButtonText: cancelText,
+      customClass: {
+        popup: 'md3-dialog',
+        title: 'md3-dialog-title',
+        htmlContainer: 'md3-dialog-body',
+        confirmButton: 'md-btn md-btn-filled md3-dialog-confirm',
+        cancelButton: 'md-btn md-btn-outlined md3-dialog-cancel',
+        input: 'md3-dialog-input',
+        actions: 'md3-dialog-actions'
+      },
+      buttonsStyling: false,
+      showClass: { popup: 'swal2-show-md3' },
+      hideClass: { popup: 'swal2-hide-md3' }
+    });
+    return res.isConfirmed ? res.value : null;
+  }
+  return fallbackDialog({ title, text, type: 'prompt', inputValue, inputPlaceholder, confirmText, cancelText });
+}
+
+async function mdToast({ title = '', icon = 'success' } = {}){
+  if (typeof Swal !== 'undefined') {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      backdrop: false,
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+      customClass: {
+        popup: 'md3-toast'
+      }
+    });
+    return Toast.fire({ icon, title });
+  }
+}
+
+const STORAGE_KEY = "harvard-cv-builder/v1";
+
+const defaultData = () => ({
+  personal: {
+    name: "", title: "", email: "", phone: "", location: "",
+    dob: "", nationality: "", website: "", github: "", other: ""
+  },
+  sections: [],
+});
+
+const sampleData = () => ({
+  personal: {
+    name: "Muhammad Rutaab Ali",
+    title: "Web Developer · E-commerce & SEO Specialist",
+    email: "rutaabali3@gmail.com",
+    phone: "+92 319 2342358",
+    location: "Nazimabad No.3, Karachi",
+    dob: "",
+    nationality: "",
+    website: "",
+    github: "github.com/rutaabali3",
+    other: "",
+  },
+  sections: [
+    {
+      id: uid(), type: "summary", title: "Profile",
+      body: "I am Muhammad Rutaab Ali. I am currently studying at Aptech Learning for a Diploma in Information Technology (IT), and I plan to start a BSCS soon."
+    },
+    {
+      id: uid(), type: "education", title: "Education",
+      items: [
+        { id: uid(), title: "SM Public Academy", sub: "Matriculation", date: "2022", body: "Marks: 966/1100 (87.82%)" },
+        { id: uid(), title: "Govt. National College", sub: "Intermediate", date: "2024", body: "Marks: 557/1100 (50.64%)" },
+        { id: uid(), title: "Aptech Learning", sub: "Diploma (IT)", date: "In Progress", body: "1.5 Years Completed" },
+      ]
+    },
+    {
+      id: uid(), type: "experience", title: "Experience",
+      items: [
+        {
+          id: uid(), title: "Content Assistance", sub: "Digital Marketing", date: "2025 – Present",
+          body: "• Engineered basic video and image content to promote products while managing 50+ digital assets.\n• Streamlined workflow for cross-platform distribution across web and social channels."
+        }
+      ]
+    },
+    {
+      id: uid(), type: "awards", title: "Awards & Honors",
+      items: [
+        {
+          id: uid(),
+          title: "1st Place Winner - Web Dev Hackathon",
+          sub: "Aptech Tech Expo",
+          date: "2024",
+          link: "https://github.com/rutaabali3/hackathon-winner",
+          body: "",
+          extraFields: []
+        }
+      ]
+    },
+    {
+      id: uid(), type: "skills", title: "Skills & Interests",
+      groups: [
+        { id: uid(), label: "Technical", items: ["HTML/CSS", "JavaScript", "SEO", "Prompt Engineering"] },
+        { id: uid(), label: "Tools", items: ["MS Office", "Git", "Photoshop", "VS Code"] }
+      ]
+    }
+  ],
+});
+
+function uid(){ return Math.random().toString(36).slice(2, 10); }
+function $(sel, root=document){ return root.querySelector(sel); }
+function $$(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+function el(tag, attrs={}, ...kids){
+  const svgTags = new Set(["svg", "path", "g", "circle", "rect", "line", "polygon", "polyline"]);
+  const n = svgTags.has(tag)
+    ? document.createElementNS("http://www.w3.org/2000/svg", tag)
+    : document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)){
+    if (k === "class") {
+      if (svgTags.has(tag)) n.setAttribute("class", v);
+      else n.className = v;
+    }
+    else if (k === "html") n.innerHTML = v;
+    else if (k.startsWith("on") && typeof v === "function") n.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) n.setAttribute(k, v);
+  }
+  for (const kid of kids.flat()){
+    if (kid == null || kid === false) continue;
+    n.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+  }
+  return n;
+}
+function deepClone(x){ return JSON.parse(JSON.stringify(x)); }
+
+const SECTION_ICONS = {
+  summary: '<svg viewBox="0 0 24 24" class="md-icon"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>',
+  experience: '<svg viewBox="0 0 24 24" class="md-icon"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>',
+  education: '<svg viewBox="0 0 24 24" class="md-icon"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>',
+  projects: '<svg viewBox="0 0 24 24" class="md-icon"><path d="m9.4 16.6 4.6-4.6-4.6-4.6L10.8 6l6 6-6 6-1.4-1.4zm-4.8 0 4.6-4.6-4.6-4.6L6 6l6 6-6 6-1.4-1.4z"/></svg>',
+  skills: '<svg viewBox="0 0 24 24" class="md-icon"><path d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1l-1 7h3.51c.4 0 .62.19.4.66C13.25 16.03 11 21 11 21z"/></svg>',
+  certifications: '<svg viewBox="0 0 24 24" class="md-icon"><path d="m12 1 3.09 3.09 4.37.52.52 4.37 3.09 3.09-3.09 3.09-.52 4.37-4.37.52L12 23l-3.09-3.09-4.37-.52-.52-4.37-3.09-3.09 3.09-3.09.52-4.37 4.37-.52L12 1zm-1.05 15.42 6.07-6.07-1.41-1.41-4.66 4.66-2.54-2.54-1.41 1.41 3.95 3.95z"/></svg>',
+  awards: '<svg viewBox="0 0 24 24" class="md-icon"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>',
+  languages: '<svg viewBox="0 0 24 24" class="md-icon"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>',
+  publications: '<svg viewBox="0 0 24 24" class="md-icon"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>',
+  leadership: '<svg viewBox="0 0 24 24" class="md-icon"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>',
+  custom: '<svg viewBox="0 0 24 24" class="md-icon"><path d="M16 9V4l1 0c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1l1 0v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg>',
+};
+
+const SECTION_TYPES = {
+  summary: { label: "Summary / Profile", kind: "text" },
+  experience: { label: "Experience", kind: "items", titleLabel: "Role / Job Title", subLabel: "Company / Organization", defaultBody: true },
+  education: { label: "Education", kind: "items", titleLabel: "Degree / Program", subLabel: "School / Institution", defaultBody: true },
+  projects: { label: "Projects", kind: "items", titleLabel: "Project Name", subLabel: "Technologies / Tools", defaultBody: true },
+  skills: { label: "Skills", kind: "skills" },
+  certifications:{ label: "Certifications", kind: "items", titleLabel: "Certification Name", subLabel: "Issuing Organization", defaultBody: false },
+  awards: { label: "Awards & Honors", kind: "items", titleLabel: "Award / Honor Name", subLabel: "Grantor / Organization", defaultBody: false },
+  publications: { label: "Publications", kind: "items", titleLabel: "Paper / Article Title", subLabel: "Journal / Conference", defaultBody: false },
+  leadership: { label: "Leadership & Volunteering", kind: "items", titleLabel: "Role / Position", subLabel: "Organization / Community", defaultBody: true },
+  languages: { label: "Languages", kind: "languages" },
+  custom: { label: "Custom Section", kind: "items", titleLabel: "Title / Role / Honor", subLabel: "Organization / Subtitle", defaultBody: true },
+};
+
+function newItem(){
+  return { id: uid(), title: "", sub: "", date: "", link: "", body: "", extraFields: [] };
+}
+
+function normalizeSection(sec){
+  if (!sec) return sec;
+  const meta = SECTION_TYPES[sec.type] || SECTION_TYPES.custom;
+  if (sec.type === "custom") {
+    if (sec.body && (!sec.items || !sec.items.length)) {
+      sec.customMode = sec.customMode || "text";
+    } else {
+      sec.customMode = sec.customMode || "items";
+    }
+  }
+  if (meta.kind === "items" || sec.type === "awards" || sec.type === "certifications" || sec.type === "publications" || sec.type === "leadership" || (sec.type === "custom" && sec.customMode !== "text")) {
+    if (Array.isArray(sec.items)) {
+      sec.items = sec.items.map(it => {
+        if (typeof it === "string") {
+          return { id: uid(), title: it, sub: "", date: "", link: "", body: "", extraFields: [] };
+        }
+        if (!it.id) it.id = uid();
+        if (it.extraFields == null) it.extraFields = [];
+        if (it.link == null) it.link = "";
+        return it;
+      });
+    } else {
+      sec.items = [ newItem() ];
+    }
+  } else if (meta.kind === "languages" || sec.type === "languages") {
+    if (Array.isArray(sec.items)) {
+      sec.items = sec.items.map(it => {
+        if (typeof it === "string") {
+          const parts = it.split(/[-–—:(]/);
+          return { id: uid(), title: parts[0]?.trim() || "", sub: parts[1]?.replace(/[)]/g, "")?.trim() || "", extraFields: [] };
+        }
+        if (!it.id) it.id = uid();
+        if (it.extraFields == null) it.extraFields = [];
+        return it;
+      });
+    } else {
+      sec.items = [ { id: uid(), title: "English", sub: "Native / Bilingual", extraFields: [] } ];
+    }
+  }
+  return sec;
+}
+
+function newSection(type){
+  const meta = SECTION_TYPES[type] || SECTION_TYPES.custom;
+  const base = { id: uid(), type, title: meta.label };
+  switch (meta.kind){
+    case "text": return { ...base, body: "" };
+    case "items": return { ...base, items: [ newItem() ], customMode: "items" };
+    case "languages": return { ...base, items: [ { id: uid(), title: "English", sub: "Native / Bilingual", extraFields: [] } ] };
+    case "skills": return { ...base, groups: [ { id:uid(), label:"Technical Skills", items:[""] } ] };
+    case "list": return { ...base, items: [""] };
+  }
+  return base;
+}
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const p = JSON.parse(raw);
+      if (p.personal && Array.isArray(p.sections)) {
+        p.sections.forEach(s => normalizeSection(s));
+        return p;
+      }
+    }
+  }catch{}
+  return defaultData();
+}
+
+let profilesData = { activeId: 'default', profiles: { 'default': { id: 'default', name: 'My CV', data: loadState() } } };
+
+function loadProfilesState() {
+  try {
+    const raw = localStorage.getItem('harvard-cv-builder/v2');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed.profiles) {
+        Object.values(parsed.profiles).forEach(prof => {
+          if (prof.data && Array.isArray(prof.data.sections)) {
+            prof.data.sections.forEach(s => normalizeSection(s));
+          }
+        });
+        return parsed;
+      }
+    }
+  } catch(e) {}
+  return profilesData;
+}
+profilesData = loadProfilesState();
+let state = profilesData.profiles[profilesData.activeId]?.data || defaultData();
+
+// Set of section IDs that are currently unfolded/open
+const openSectionIds = new Set();
+if (state.sections.length > 0) {
+  // Start with only the first section open for optimal spacing
+  openSectionIds.add(state.sections[0].id);
+}
+
+function toggleSectionCard(secId) {
+  if (openSectionIds.has(secId)) {
+    openSectionIds.delete(secId);
+  } else {
+    openSectionIds.add(secId);
+  }
+  const card = $(`[data-sec-id="${secId}"]`);
+  if (card) {
+    card.classList.toggle("open", openSectionIds.has(secId));
+  }
+  updateToggleAllButton();
+}
+
+function updateToggleAllButton() {
+  const btn = $('#btn-toggle-all-sections');
+  if (!btn) return;
+  const allOpen = state.sections.length > 0 && state.sections.every(s => openSectionIds.has(s.id));
+  btn.textContent = allOpen ? 'Collapse All' : 'Expand All';
+}
+
+function getSectionBadge(sec, meta) {
+  if (sec.type === "custom" && sec.customMode === "text") {
+    const words = (sec.body || "").trim() ? (sec.body || "").trim().split(/\s+/).length : 0;
+    return words ? `${words} words` : "Empty";
+  }
+  if (meta.kind === "text") {
+    const words = (sec.body || "").trim() ? (sec.body || "").trim().split(/\s+/).length : 0;
+    return words ? `${words} words` : "Empty";
+  }
+  if (meta.kind === "items" || meta.kind === "languages") {
+    const count = (sec.items || []).length;
+    return `${count} ${count === 1 ? 'entry' : 'entries'}`;
+  }
+  if (meta.kind === "skills") {
+    const count = (sec.groups || []).length;
+    return `${count} ${count === 1 ? 'group' : 'groups'}`;
+  }
+  if (meta.kind === "list") {
+    const count = (sec.items || []).filter(Boolean).length;
+    return `${count} ${count === 1 ? 'item' : 'items'}`;
+  }
+  return "";
+}
+
+let saveTimer = null;
+function saveState(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{
+    if (!profilesData.profiles[profilesData.activeId]) {
+      profilesData.profiles[profilesData.activeId] = { id: profilesData.activeId, name: 'My CV', data: state };
+    }
+    profilesData.profiles[profilesData.activeId].data = state;
+    try{ localStorage.setItem('harvard-cv-builder/v2', JSON.stringify(profilesData)); }catch{}
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch{}
+    checkBullets();
+  }, 250);
+}
+
+/* ---------------- Render Editor ---------------- */
+function renderEditor(){
+  for (const input of $$("[data-field]")){
+    const f = input.dataset.field;
+    input.value = state.personal[f] ?? "";
+    input.oninput = () => {
+      state.personal[f] = input.value;
+      renderPreview();
+      saveState();
+    };
+  }
+
+  const list = $("#section-list");
+  list.innerHTML = "";
+  if (!state.sections.length) {
+    list.innerHTML = `
+      <div style="text-align:center; padding:24px 16px; border:2px dashed var(--md-sys-color-outline-variant); border-radius:12px; color:var(--md-sys-color-on-surface-variant)">
+        <p style="font-size:14px; margin-bottom:8px; font-weight:500;">No sections added yet</p>
+        <p style="font-size:12px;">Click any section chip above to start building your CV!</p>
+      </div>`;
+  } else {
+    state.sections.forEach((sec, idx) => list.appendChild(renderSectionCard(sec, idx)));
+  }
+  updateToggleAllButton();
+
+  // Update topbar profile label
+  const activeProfile = profilesData.profiles[profilesData.activeId];
+  if (activeProfile && $('#topbar-profile-name')) {
+    $('#topbar-profile-name').textContent = activeProfile.name || 'My CV';
+  }
+}
+
+function renderSectionCard(sec, idx){
+  normalizeSection(sec);
+  const meta = SECTION_TYPES[sec.type] || SECTION_TYPES.custom;
+  const isOpen = openSectionIds.has(sec.id);
+  const card = el("div", { class: "section-card" + (isOpen ? " open" : ""), draggable: "true", "data-sec-id": sec.id });
+
+  card.addEventListener("dragstart", e => {
+    card.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/sec-id", sec.id);
+  });
+  card.addEventListener("dragend", () => card.classList.remove("dragging"));
+  card.addEventListener("dragover", e => { e.preventDefault(); });
+  card.addEventListener("drop", e => {
+    e.preventDefault();
+    const fromId = e.dataTransfer.getData("text/sec-id");
+    if (!fromId || fromId === sec.id) return;
+    reorderSections(fromId, sec.id);
+  });
+
+  // Header row (clicking header folds/unfolds)
+  const header = el("div", { class: "section-card-header" });
+  header.addEventListener("click", (e) => {
+    if (e.target.closest(".sec-title-input") || e.target.closest(".sec-del-btn") || e.target.closest(".drag-grip") || e.target.closest(".custom-mode-btn")) {
+      return;
+    }
+    toggleSectionCard(sec.id);
+  });
+  
+  // Drag grip
+  const grip = el("span", {
+    class: "drag-grip",
+    title: "Drag to reorder",
+    html: '<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>'
+  });
+
+  const icon = el("span", { class: "sec-type-icon", html: SECTION_ICONS[sec.type] || SECTION_ICONS.custom });
+
+  const titleInput = el("input", {
+    class: "sec-title-input",
+    value: sec.title,
+    placeholder: "Section title",
+    oninput: (e) => { sec.title = e.target.value; renderPreview(); saveState(); },
+    onclick: (e) => e.stopPropagation(),
+    onkeydown: (e) => e.stopPropagation(),
+  });
+
+  const countBadge = el("span", { class: "sec-count-badge" }, getSectionBadge(sec, meta));
+
+  const actions = el("div", { class: "sec-actions" });
+
+  const toggleBtn = el("button", {
+    class: "sec-toggle-btn",
+    type: "button",
+    title: "Fold / Unfold",
+    html: '<svg viewBox="0 0 24 24"><path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>',
+    onclick: (e) => {
+      e.stopPropagation();
+      toggleSectionCard(sec.id);
+    }
+  });
+
+  const delBtn = el("button", {
+    class: "sec-del-btn",
+    type: "button",
+    title: "Delete section",
+    html: '<svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>',
+    onclick: async (e) => {
+      e.stopPropagation();
+      const confirmed = await mdConfirm({
+        title: "Delete Section?",
+        text: `Are you sure you want to remove "${sec.title || 'this section'}"? All entries in it will be removed.`,
+        confirmText: "Delete",
+        isDanger: true,
+        icon: "warning"
+      });
+      if (confirmed){
+        openSectionIds.delete(sec.id);
+        state.sections = state.sections.filter(s => s.id !== sec.id);
+        renderEditor();
+        renderPreview();
+        saveState();
+        await mdToast({ title: "Section removed", icon: "info" });
+      }
+    }
+  });
+
+  actions.append(toggleBtn, delBtn);
+  header.append(grip, icon, titleInput, countBadge, actions);
+  card.append(header);
+
+  // Section Body
+  const body = el("div", { class:"section-body" });
+
+  // Custom Section Format Switcher
+  if (sec.type === "custom") {
+    const modeSwitch = el("div", { class: "custom-mode-switch" },
+      el("span", {}, "Section Format:"),
+      el("div", { class: "custom-mode-btn-group" },
+        el("button", {
+          type: "button",
+          class: `custom-mode-btn ${sec.customMode === "items" ? "active" : ""}`,
+          onclick: () => {
+            sec.customMode = "items";
+            if (!sec.items || !sec.items.length) sec.items = [ newItem() ];
+            renderEditor(); renderPreview(); saveState();
+          }
+        }, "Multi-Field Entries"),
+        el("button", {
+          type: "button",
+          class: `custom-mode-btn ${sec.customMode === "text" ? "active" : ""}`,
+          onclick: () => {
+            sec.customMode = "text";
+            sec.body = sec.body || "";
+            renderEditor(); renderPreview(); saveState();
+          }
+        }, "Paragraph Text")
+      )
+    );
+    body.append(modeSwitch);
+  }
+
+  const isCustomText = sec.type === "custom" && sec.customMode === "text";
+
+  if (meta.kind === "text" || isCustomText){
+    const ta = el("textarea", {
+      class: "md-field-textarea",
+      placeholder: sec.type === "summary" ? "Write a summary paragraph or profile statement..." : "Write custom section text...",
+      style: "min-height:90px;",
+      oninput: (e) => { sec.body = e.target.value; renderPreview(); saveState(); },
+    });
+    ta.value = sec.body ?? "";
+    body.append(ta);
+  } else if (meta.kind === "items" || (sec.type === "custom" && sec.customMode !== "text")){
+    sec.items = sec.items || [];
+    sec.items.forEach((item, i) => body.append(renderItemEditor(sec, item, i)));
+    body.append(
+      el("button", {
+        class: "md-btn md-btn-tonal",
+        type: "button",
+        style: "align-self:flex-start; height:34px; font-size:13px;",
+        onclick: () => { sec.items.push(newItem()); renderEditor(); renderPreview(); saveState(); }
+      }, "+ Add Entry")
+    );
+  } else if (meta.kind === "languages") {
+    sec.items = sec.items || [];
+    const wrap = el("div", { class: "simple-list" });
+    sec.items.forEach((item, i) => {
+      const row = el("div", { class: "item-card", style: "padding:12px;" });
+      row.append(
+        el("div", { class: "md-grid-2" },
+          el("div", { class: "md-field" },
+            el("label", { class: "md-field-label" }, "Language"),
+            el("input", {
+              class: "md-field-input",
+              type: "text",
+              value: item.title || "",
+              placeholder: "e.g. English, French, Urdu",
+              oninput: (e) => { item.title = e.target.value; renderPreview(); saveState(); }
+            })
+          ),
+          el("div", { class: "md-field" },
+            el("label", { class: "md-field-label" }, "Proficiency Level"),
+            el("input", {
+              class: "md-field-input",
+              type: "text",
+              value: item.sub || "",
+              placeholder: "e.g. Native, Fluent, Intermediate, C1",
+              oninput: (e) => { item.sub = e.target.value; renderPreview(); saveState(); }
+            })
+          )
+        )
+      );
+
+      // Render extra fields if any
+      if (item.extraFields && item.extraFields.length) {
+        const extraWrap = el("div", { class: "extra-fields-wrap" });
+        item.extraFields.forEach((ef, fIdx) => {
+          extraWrap.append(renderExtraFieldRow(item, ef, fIdx));
+        });
+        row.append(extraWrap);
+      }
+
+      // Foot with + Add Field and Remove
+      row.append(
+        el("div", { class: "item-foot", style: "margin-top:6px;" },
+          el("div", { class: "field-chips-row" },
+            el("button", {
+              class: "field-chip-pill",
+              type: "button",
+              onclick: async () => {
+                const name = await mdPrompt({
+                  title: "Add Field",
+                  text: "Enter field name (e.g. Certification, Dialect, Level):",
+                  inputValue: "Certification",
+                  confirmText: "Add"
+                });
+                if (name && name.trim()) {
+                  item.extraFields = item.extraFields || [];
+                  item.extraFields.push({ id: uid(), label: name.trim(), value: "" });
+                  renderEditor(); renderPreview(); saveState();
+                }
+              }
+            }, "+ Add Field")
+          ),
+          el("button", {
+            class: "md-btn md-btn-danger",
+            type: "button",
+            style: "height:26px; padding:0 8px; font-size:11px;",
+            onclick: () => {
+              sec.items.splice(i, 1);
+              if (!sec.items.length) sec.items.push({ id: uid(), title: "", sub: "", extraFields: [] });
+              renderEditor(); renderPreview(); saveState();
+            }
+          }, "Remove")
+        )
+      );
+      wrap.append(row);
+    });
+    body.append(wrap);
+    body.append(
+      el("button", {
+        class: "md-btn md-btn-tonal",
+        type: "button",
+        style: "align-self:flex-start; height:34px; font-size:13px;",
+        onclick: () => {
+          sec.items.push({ id: uid(), title: "", sub: "", extraFields: [] });
+          renderEditor(); renderPreview(); saveState();
+        }
+      }, "+ Add Language")
+    );
+  } else if (meta.kind === "list"){
+    sec.items = sec.items || [];
+    const wrap = el("div", { class:"simple-list" });
+    sec.items.forEach((val, i) => {
+      const row = el("div", { class:"simple-list-row" });
+      const input = el("input", {
+        class: "md-field-input",
+        type: "text",
+        value: val,
+        placeholder: "Enter item...",
+        oninput: (e) => { sec.items[i] = e.target.value; renderPreview(); saveState(); },
+        onkeydown: (e) => {
+          if (e.key === "Enter"){ e.preventDefault(); sec.items.splice(i+1, 0, ""); renderEditor(); renderPreview(); saveState(); }
+          else if (e.key === "Backspace" && e.target.value === "" && sec.items.length > 1){ e.preventDefault(); sec.items.splice(i,1); renderEditor(); renderPreview(); saveState(); }
+        }
+      });
+      const del = el("button", {
+        class: "sec-del-btn",
+        type: "button",
+        title: "Remove item",
+        html: '<svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>',
+        onclick: () => {
+          sec.items.splice(i, 1);
+          if (!sec.items.length) sec.items.push("");
+          renderEditor(); renderPreview(); saveState();
+        }
+      });
+      row.append(input, del);
+      wrap.append(row);
+    });
+    body.append(wrap);
+    body.append(
+      el("button", {
+        class: "md-btn md-btn-tonal",
+        type: "button",
+        style: "align-self:flex-start; height:34px; font-size:13px;",
+        onclick: () => { sec.items.push(""); renderEditor(); renderPreview(); saveState(); }
+      }, "+ Add Item")
+    );
+  } else if (meta.kind === "skills"){
+    sec.groups = sec.groups || [];
+    sec.groups.forEach((g, gi) => body.append(renderSkillsGroupEditor(sec, g, gi)));
+    body.append(
+      el("button", {
+        class: "md-btn md-btn-tonal",
+        type: "button",
+        style: "align-self:flex-start; height:34px; font-size:13px;",
+        onclick: () => { sec.groups.push({ id:uid(), label:"New Skill Group", items:[""] }); renderEditor(); renderPreview(); saveState(); }
+      }, "+ Add Skill Group")
+    );
+  }
+
+  card.append(body);
+  return card;
+}
+
+function renderExtraFieldRow(item, ef, fIdx){
+  const row = el("div", { class: "extra-field-row" });
+  const labelCol = el("div", { class: "extra-field-label-col" },
+    el("label", { class: "md-field-label" }, "Field Name"),
+    el("input", {
+      class: "md-field-input extra-label-input",
+      type: "text",
+      value: ef.label,
+      placeholder: "e.g. Location, GPA",
+      oninput: (e) => { ef.label = e.target.value; renderPreview(); saveState(); }
+    })
+  );
+  const valCol = el("div", { class: "extra-field-val-col" },
+    el("label", { class: "md-field-label" }, ef.label || "Value"),
+    el("input", {
+      class: "md-field-input",
+      type: "text",
+      value: ef.value,
+      placeholder: `Enter ${ef.label || 'value'}...`,
+      oninput: (e) => { ef.value = e.target.value; renderPreview(); saveState(); }
+    })
+  );
+  const delBtn = el("button", {
+    class: "extra-field-del-btn",
+    type: "button",
+    title: "Remove field",
+    html: '<svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>',
+    onclick: () => {
+      item.extraFields.splice(fIdx, 1);
+      renderEditor(); renderPreview(); saveState();
+    }
+  });
+  row.append(labelCol, valCol, delBtn);
+  return row;
+}
+
+function renderItemEditor(sec, item, i){
+  if (!item.id) item.id = uid();
+  if (item.extraFields == null) item.extraFields = [];
+  if (item.link == null) item.link = "";
+  if (item.title == null) item.title = "";
+  if (item.sub == null) item.sub = "";
+  if (item.date == null) item.date = "";
+
+  const secMeta = SECTION_TYPES[sec.type] || SECTION_TYPES.custom;
+  const titleLabel = secMeta.titleLabel || "Role / Title";
+  const subLabel = secMeta.subLabel || "Company / Institution";
+  const isExpOrEdu = sec.type === "experience" || sec.type === "education" || sec.type === "projects";
+  const isAwardOrCert = sec.type === "awards" || sec.type === "certifications";
+
+  const titlePlaceholder = sec.type === "awards" ? "e.g. 1st Place - National Hackathon" :
+                          sec.type === "certifications" ? "e.g. AWS Certified Solutions Architect" :
+                          sec.type === "publications" ? "e.g. Scalable AI Systems for Healthcare" :
+                          sec.type === "education" ? "e.g. BS in Computer Science" :
+                          sec.type === "projects" ? "e.g. Real-Time Analytics Engine" :
+                          sec.type === "leadership" ? "e.g. Chapter President / Volunteer Lead" :
+                          sec.type === "custom" ? "e.g. Patent Title / Role / Recognition" :
+                          "e.g. Senior Software Engineer";
+
+  const subPlaceholder = sec.type === "awards" ? "e.g. ACM / IEEE / Harvard University" :
+                        sec.type === "certifications" ? "e.g. Amazon Web Services" :
+                        sec.type === "publications" ? "e.g. IEEE Transactions on Software Eng" :
+                        sec.type === "education" ? "e.g. Harvard University" :
+                        sec.type === "projects" ? "e.g. React, Python, PostgreSQL, Docker" :
+                        sec.type === "leadership" ? "e.g. IEEE Student Branch / Red Cross" :
+                        sec.type === "custom" ? "e.g. Organization / Foundation / Venue" :
+                        "e.g. Google / Microsoft";
+
+  const card = el("div", { class:"item-card" });
+
+  // Grid Row 1: Title & Organization / Subtitle
+  card.append(
+    el("div", { class:"md-grid-2" },
+      el("div", { class:"md-field" },
+        el("label", { class:"md-field-label" }, titleLabel),
+        el("input", {
+          class: "md-field-input",
+          type: "text",
+          value: item.title,
+          placeholder: titlePlaceholder,
+          oninput: e => { item.title = e.target.value; renderPreview(); saveState(); }
+        })
+      ),
+      el("div", { class:"md-field" },
+        el("label", { class:"md-field-label" }, subLabel),
+        el("input", {
+          class: "md-field-input",
+          type: "text",
+          value: item.sub,
+          placeholder: subPlaceholder,
+          oninput: e => { item.sub = e.target.value; renderPreview(); saveState(); }
+        })
+      )
+    )
+  );
+
+  // Grid Row 2: Date & Link / URL
+  card.append(
+    el("div", { class:"md-grid-2" },
+      el("div", { class:"md-field" },
+        el("label", { class:"md-field-label" }, "Date / Timeframe"),
+        el("input", {
+          class: "md-field-input",
+          type: "text",
+          value: item.date,
+          placeholder: sec.type === "awards" || sec.type === "certifications" ? "e.g. 2024 / May 2023" : "e.g. 2023 – Present / May 2022",
+          oninput: e => { item.date = e.target.value; renderPreview(); saveState(); }
+        })
+      ),
+      el("div", { class:"md-field" },
+        el("label", { class:"md-field-label" }, isAwardOrCert ? "Credential / Verification Link" : "Link / URL (optional)"),
+        el("input", {
+          class: "md-field-input",
+          type: "text",
+          value: item.link,
+          placeholder: "e.g. https://... or github.com/...",
+          oninput: e => { item.link = e.target.value; renderPreview(); saveState(); }
+        })
+      )
+    )
+  );
+
+  // Extra Fields Container
+  if (item.extraFields && item.extraFields.length > 0) {
+    const extraWrap = el("div", { class: "extra-fields-wrap" });
+    item.extraFields.forEach((ef, fIdx) => {
+      extraWrap.append(renderExtraFieldRow(item, ef, fIdx));
+    });
+    card.append(extraWrap);
+  }
+
+  // Description / Bullets
+  const showBody = isExpOrEdu || sec.type === "leadership" || sec.type === "custom" || (item.body && item.body.trim()) || item.showBody;
+  if (showBody) {
+    card.append(
+      el("div", { class:"md-field" },
+        el("label", { class:"md-field-label" }, "Bullet points & Description (Type • at start of lines)"),
+        el("textarea", {
+          class: "md-field-textarea",
+          placeholder: "• Spearheaded project development...\n• Increased conversion rates by 25%...",
+          style: "min-height:70px;",
+          value: item.body ?? "",
+          oninput: e => { item.body = e.target.value; renderPreview(); saveState(); }
+        })
+      )
+    );
+  }
+
+  // Item Foot with "+ Add Field" options and "Remove entry"
+  const foot = el("div", { class: "item-foot" });
+  const addFieldBox = el("div", { class: "add-field-control" });
+
+  const existingLabels = new Set((item.extraFields || []).map(f => f.label.toLowerCase().trim()));
+  const chipsRow = el("div", { class: "field-chips-row" });
+
+  // Preset suggestions based on section type
+  const presets = [];
+  if (!existingLabels.has("location") && sec.type !== "certifications") presets.push("Location");
+  if (!existingLabels.has("grade / gpa") && !existingLabels.has("gpa") && (sec.type === "education" || sec.type === "custom")) presets.push("Grade / GPA");
+  if (!existingLabels.has("credential id") && (sec.type === "certifications" || sec.type === "awards" || sec.type === "custom")) presets.push("Credential ID");
+  if (!existingLabels.has("technologies") && !existingLabels.has("tools") && (sec.type === "experience" || sec.type === "projects")) presets.push("Technologies");
+  if (!existingLabels.has("adviser") && !existingLabels.has("mentor") && (sec.type === "education" || sec.type === "publications")) presets.push("Adviser");
+
+  presets.slice(0, 3).forEach(preset => {
+    chipsRow.append(el("button", {
+      class: "field-chip-pill",
+      type: "button",
+      onclick: () => {
+        item.extraFields.push({ id: uid(), label: preset, value: "" });
+        renderEditor(); renderPreview(); saveState();
+      }
+    }, `+ ${preset}`));
+  });
+
+  // + Custom Field button
+  chipsRow.append(el("button", {
+    class: "field-chip-pill custom-add-pill",
+    type: "button",
+    onclick: async () => {
+      const name = await mdPrompt({
+        title: "Add Custom Field",
+        text: "Enter custom field name (e.g. Location, GPA, Adviser, Credential ID, Venue):",
+        inputPlaceholder: "Field name",
+        confirmText: "Add"
+      });
+      if (name && name.trim()) {
+        item.extraFields.push({ id: uid(), label: name.trim(), value: "" });
+        renderEditor(); renderPreview(); saveState();
+      }
+    }
+  }, "+ Custom Field"));
+
+  // If body is hidden, provide "+ Add Description" chip
+  if (!showBody) {
+    chipsRow.append(el("button", {
+      class: "field-chip-pill",
+      type: "button",
+      onclick: () => {
+        item.showBody = true;
+        renderEditor();
+      }
+    }, "+ Note / Bullets"));
+  }
+
+  addFieldBox.append(
+    el("span", { style: "font-size:11.5px; font-weight:600; color:var(--md-sys-color-outline); margin-right:2px;" }, "Add field:"),
+    chipsRow
+  );
+
+  const removeBtn = el("button", {
+    class: "md-btn md-btn-danger",
+    type: "button",
+    style: "height:28px; padding:0 8px; font-size:12px;",
+    onclick: () => {
+      sec.items = sec.items.filter(x => x.id !== item.id);
+      renderEditor(); renderPreview(); saveState();
+    }
+  }, "Remove entry");
+
+  foot.append(addFieldBox, removeBtn);
+  card.append(foot);
+  return card;
+}
+
+function renderSkillsGroupEditor(sec, group, gi){
+  const wrap = el("div", { class:"item-card" });
+  wrap.append(
+    el("div", { class:"md-field" },
+      el("label", { class:"md-field-label" }, "Group Name"),
+      el("input", {
+        class: "md-field-input",
+        type: "text",
+        value: group.label,
+        placeholder: "e.g. Programming Languages, Design Tools",
+        oninput: (e) => { group.label = e.target.value; renderPreview(); saveState(); }
+      })
+    )
+  );
+
+  const chips = el("div", { class:"chips-input" });
+  group.items.forEach((skill, si) => {
+    if (skill === "" && si !== group.items.length - 1) return;
+    chips.append(
+      el("span", { class:"chip" },
+        skill || "(empty)",
+        el("button", {
+          type: "button",
+          onclick: () => {
+            group.items.splice(si, 1);
+            if (!group.items.length) group.items.push("");
+            renderEditor(); renderPreview(); saveState();
+          }
+        }, "×")
+      )
+    );
+  });
+
+  chips.append(el("input", {
+    type: "text",
+    placeholder: "+ Type skill & press Enter...",
+    onkeydown: (e) => {
+      if (e.key === "Enter" && e.target.value.trim()){
+        e.preventDefault();
+        group.items.push(e.target.value.trim());
+        if (!group.items.includes("")) group.items.push("");
+        renderEditor(); renderPreview(); saveState();
+      } else if (e.key === "Backspace" && e.target.value === "" && group.items.length > 1){
+        e.preventDefault();
+        group.items.pop();
+        if (!group.items.length) group.items = [""];
+        renderEditor(); renderPreview(); saveState();
+      }
+    }
+  }));
+
+  wrap.append(
+    el("div", { class:"md-field" },
+      el("label", { class:"md-field-label" }, "Skills in this group"),
+      chips
+    ),
+    el("div", { class:"item-foot" },
+      el("button", {
+        class: "md-btn md-btn-danger",
+        type: "button",
+        style: "height:28px; padding:0 8px; font-size:12px;",
+        onclick: () => {
+          sec.groups = sec.groups.filter(g => g.id !== group.id);
+          renderEditor(); renderPreview(); saveState();
+        }
+      }, "Remove group")
+    )
+  );
+  return wrap;
+}
+
+function reorderSections(fromId, toId){
+  const from = state.sections.findIndex(s => s.id === fromId);
+  const to = state.sections.findIndex(s => s.id === toId);
+  if (from < 0 || to < 0) return;
+  const [moved] = state.sections.splice(from, 1);
+  state.sections.splice(to, 0, moved);
+  renderEditor();
+  renderPreview();
+  saveState();
+}
+
+// 1-Click Quick Add Section Chips
+$$("[data-add-sec]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const type = btn.dataset.addSec;
+    const sec = newSection(type);
+    state.sections.push(sec);
+    openSectionIds.add(sec.id);
+    renderEditor();
+    renderPreview();
+    saveState();
+
+    // Scroll to the newly added section
+    setTimeout(() => {
+      const card = $(`[data-sec-id="${sec.id}"]`);
+      if (card) {
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+        card.classList.add("open");
+      }
+    }, 50);
+  });
+});
+
+/* ---------------- Render Preview ---------------- */
+function renderPreview(){
+  const headerNode = renderHeader();
+  const sectionFlows = state.sections.map(sec => buildSectionFlow(sec));
+  const pages = paginate(headerNode, sectionFlows);
+  const cv = $("#cv");
+  cv.innerHTML = "";
+  pages.forEach(nodes => {
+    const page = el("article", { class:"cv-page" });
+    nodes.forEach(n => page.append(n));
+    cv.append(page);
+  });
+  attachInlineEditing();
+}
+
+function paginate(headerNode, sectionFlows){
+  const ref = document.createElement("div");
+  ref.className = "cv-page";
+  ref.style.cssText = "position:absolute; visibility:hidden; left:-99999px; top:0; margin:0; box-shadow:none; transform:none;";
+  document.body.appendChild(ref);
+  const available = ref.getBoundingClientRect().height - (parseFloat(getComputedStyle(ref).paddingTop) + parseFloat(getComputedStyle(ref).paddingBottom));
+  document.body.removeChild(ref);
+
+  const measure = document.createElement("div");
+  measure.className = "cv-page";
+  measure.style.cssText = "position:absolute; visibility:hidden; left:-99999px; top:0; height:auto; min-height:0; margin:0; box-shadow:none; transform:none;";
+  document.body.appendChild(measure);
+
+  let cum = 0;
+  function measureDelta(node){
+    measure.append(node);
+    const d = (measure.scrollHeight - (parseFloat(getComputedStyle(ref).paddingTop) + parseFloat(getComputedStyle(ref).paddingBottom))) - cum;
+    cum += d;
+    return d;
+  }
+
+  const headerHeight = measureDelta(headerNode);
+  const flows = sectionFlows.map(({ heading, items }) => ({
+    heading,
+    headingHeight: measureDelta(heading),
+    items: items.map(node => ({ node, height: measureDelta(node) }))
+  }));
+  document.body.removeChild(measure);
+
+  const pages = [[]];
+  let used = 0;
+  function startNewPage(){ pages.push([]); used = 0; }
+  function place(node, h){ pages[pages.length - 1].push(node); used += h; }
+
+  place(headerNode, headerHeight);
+
+  flows.forEach(({ heading, headingHeight, items }) => {
+    const firstItemHeight = items.length ? items[0].height : 0;
+    if (used > 0 && used + headingHeight + firstItemHeight > available){
+      startNewPage();
+      heading.classList.add("page-top");
+    }
+    place(heading, headingHeight);
+    items.forEach(({ node, height }) => {
+      if (used > 0 && used + height > available) startNewPage();
+      place(node, height);
+    });
+  });
+
+  return pages;
+}
+
+function renderHeader(){
+  const p = state.personal;
+  const header = el("header", { class:"cv-header" });
+  header.append(el("h1", { class:"cv-name editable", "data-path":`personal.name`, contenteditable:"true" }, p.name || el("span", { class:"empty-ph" }, "Your Name")));
+  if (p.title || !p.name) header.append(el("p", { class:"cv-title editable", "data-path":"personal.title", contenteditable:"true" }, p.title || el("span", { class:"empty-ph" }, "Your title / role")));
+  
+  const contact = el("div", { class:"cv-contact" });
+  const pieces = [];
+  if (p.location) pieces.push(contactSpan(p.location, "personal.location"));
+  if (p.dob) pieces.push(contactSpan(p.dob, "personal.dob"));
+  if (p.nationality) pieces.push(contactSpan(p.nationality, "personal.nationality"));
+  if (p.email) pieces.push(contactSpan(p.email, "personal.email"));
+  if (p.phone) pieces.push(contactSpan(p.phone, "personal.phone"));
+  if (p.website) pieces.push(contactSpan(p.website, "personal.website"));
+  if (p.github) pieces.push(contactSpan(p.github, "personal.github"));
+  if (p.other) pieces.push(contactSpan(p.other, "personal.other"));
+
+  pieces.forEach((node, i) => {
+    if (i) contact.append(el("span", { class:"sep" }, "•"));
+    contact.append(node);
+  });
+  header.append(contact);
+  return header;
+}
+
+function contactSpan(text, path){
+  return el("span", { class:"editable", "data-path":path, contenteditable:"true" }, text);
+}
+
+function buildSectionFlow(sec){
+  normalizeSection(sec);
+  const heading = el("h2", { class:"cv-section-head editable", "data-path":`sections:${sec.id}:title`, contenteditable:"true" }, sec.title || el("span", { class:"empty-ph" }, "Section title"));
+  const meta = SECTION_TYPES[sec.type] || SECTION_TYPES.custom;
+  let items = [];
+
+  switch (meta.kind){
+    case "text":
+      items = [ el("p", { class:"cv-summary editable", "data-path":`sections:${sec.id}:body`, contenteditable:"true" }, sec.body ? sec.body : el("span", { class:"empty-ph" }, "Add your text here...")) ];
+      break;
+
+    case "items":
+      if (sec.type === "custom" && sec.customMode === "text"){
+        items = [ el("p", { class:"cv-summary editable", "data-path":`sections:${sec.id}:body`, contenteditable:"true" }, sec.body ? sec.body : el("span", { class:"empty-ph" }, "Add your text here...")) ];
+        break;
+      }
+
+      items = (sec.items || []).map(it => {
+        const node = el("div", { class:"cv-item" });
+
+        // Link element
+        let linkNode = null;
+        if (it.link && it.link.trim()){
+          const raw = it.link.trim();
+          const href = raw.startsWith("http://") || raw.startsWith("https://") ? raw : "https://" + raw;
+          let display = raw.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+          if (display.length > 28) display = display.substring(0, 26) + "...";
+          linkNode = el("a", {
+            class: "cv-item-link",
+            href: href,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            title: raw
+          }, `[${display} ↗]`);
+        }
+
+        const tNode = el("span", { class:"cv-item-title editable", "data-path":`items:${it.id}:title`, contenteditable:"true" }, it.title || el("span", { class:"empty-ph" }, "Title"));
+        const dNode = el("span", { class:"cv-item-date editable", "data-path":`items:${it.id}:date`, contenteditable:"true" }, it.date || "");
+
+        // Find Location in extraFields
+        const extraFields = (it.extraFields || []).filter(f => f && f.value && f.value.trim());
+        const locField = extraFields.find(f => f.label.toLowerCase() === "location");
+        const otherFields = extraFields.filter(f => f !== locField);
+
+        if (it.sub){
+          const titleRow = el("div", { class:"cv-item-title-row" }, tNode);
+          if (linkNode) titleRow.append(linkNode);
+          node.append(titleRow);
+
+          const subRow = el("div", { class:"cv-item-sub-row" });
+          const subLeft = el("span", { class:"cv-item-sub editable", "data-path":`items:${it.id}:sub`, contenteditable:"true" }, it.sub);
+          if (locField){
+            subLeft.append(document.createTextNode(" · "));
+            subLeft.append(el("span", { class:"cv-item-loc editable", "data-path":`extra:${it.id}:${locField.id}`, contenteditable:"true" }, locField.value));
+          }
+          subRow.append(subLeft, dNode);
+          node.append(subRow);
+        } else {
+          const head = el("div", { class:"cv-item-head" });
+          const headLeft = el("div", { style:"display:inline-flex; align-items:baseline; gap:4px; flex-wrap:wrap;" }, tNode);
+          if (linkNode) headLeft.append(linkNode);
+          if (locField){
+            headLeft.append(document.createTextNode(" · "));
+            headLeft.append(el("span", { class:"cv-item-loc editable", "data-path":`extra:${it.id}:${locField.id}`, contenteditable:"true" }, locField.value));
+          }
+          head.append(headLeft, dNode);
+          node.append(head);
+        }
+
+        // Other extra fields (Grade, Credential ID, Tech Stack, etc.)
+        if (otherFields.length > 0){
+          const metaRow = el("div", { class:"cv-item-meta" });
+          otherFields.forEach(f => {
+            const badge = el("span", { class:"cv-meta-badge" });
+            badge.append(el("strong", { class:"cv-meta-k" }, f.label + ": "));
+            badge.append(el("span", { class:"cv-meta-v editable", "data-path":`extra:${it.id}:${f.id}`, contenteditable:"true" }, f.value));
+            metaRow.append(badge);
+          });
+          node.append(metaRow);
+        }
+
+        // Bullets / Body: only render if content exists
+        if (it.body && it.body.trim()){
+          node.append(el("div", { class:"cv-item-body editable", "data-path":`items:${it.id}:body`, contenteditable:"true" }, it.body));
+        }
+
+        return node;
+      });
+      break;
+
+    case "languages":
+      const langUl = el("ul", { class:"cv-simple cv-languages" });
+      const validLangs = (sec.items || []).filter(it => it && (it.title || (typeof it === "string" && it.trim())));
+      if (!validLangs.length){
+        langUl.append(el("li", { class:"empty-ph" }, "Languages list..."));
+      } else {
+        const line = el("li", { class:"cv-lang-line" });
+        validLangs.forEach((it, idx) => {
+          if (idx > 0) line.append(document.createTextNode("  ·  "));
+          const title = typeof it === "string" ? it : it.title;
+          const sub = typeof it === "string" ? "" : it.sub;
+          const tSpan = el("strong", { class:"editable", "data-path":`items:${it.id || idx}:title`, contenteditable:"true" }, title || "Language");
+          line.append(tSpan);
+          if (sub){
+            line.append(document.createTextNode(" ("));
+            line.append(el("span", { class:"editable", "data-path":`items:${it.id || idx}:sub`, contenteditable:"true" }, sub));
+            line.append(document.createTextNode(")"));
+          }
+        });
+        langUl.append(line);
+      }
+      items = [ langUl ];
+      break;
+
+    case "list":
+      const ul = el("ul", { class:"cv-simple" });
+      (sec.items || []).forEach((it, i) => {
+        if (!it && i !== (sec.items.length - 1)) return;
+        ul.append(el("li", { class:"editable", "data-path":`list:${sec.id}:${i}`, contenteditable:"true" }, it || el("span", { class:"empty-ph" }, "Item")));
+      });
+      items = [ ul ];
+      break;
+
+    case "skills":
+      const sul = el("ul", { class:"cv-skills" });
+      (sec.groups || []).forEach(g => {
+        const li = el("li", { class:"editable", "data-path":`skg:${g.id}:label`, contenteditable:"true" });
+        li.append(el("span", { class:"k" }, g.label || "Group"), ": ", document.createTextNode((g.items||[]).filter(Boolean).join(", ") || "—"));
+        sul.append(li);
+      });
+      items = [ sul ];
+      break;
+  }
+  return { heading, items };
+}
+
+function getByPath(path){
+  const [kind, id, field] = path.split(":");
+  if (kind === "personal") return { obj: state.personal, field: id };
+  if (kind === "sections"){ const s = state.sections.find(x => x.id === id); return s ? { obj: s, field } : null; }
+  if (kind === "items"){ for (const s of state.sections){ const it = (s.items||[]).find(x => x.id === id); if (it) return { obj: it, field }; } }
+  if (kind === "extra"){
+    for (const s of state.sections){
+      for (const it of (s.items||[])){
+        if (it.id === id){
+          const f = (it.extraFields||[]).find(x => x.id === field);
+          if (f) return { obj: f, field: "value" };
+        }
+      }
+    }
+  }
+  if (kind === "list"){ const s = state.sections.find(x => x.id === id); return s ? { obj: { __index: Number(field) }, field: "value", proxyGet: () => s.items[Number(field)] ?? "", proxySet: (v) => { s.items[Number(field)] = v; } } : null; }
+  if (kind === "skg"){ for (const s of state.sections){ const g = (s.groups||[]).find(x => x.id === id); if (g) return { obj: g, field }; } }
+  return null;
+}
+
+function attachInlineEditing(){
+  $$(".editable", $("#cv")).forEach(node => {
+    node.addEventListener("blur", () => {
+      const path = node.dataset.path; if (!path) return;
+      const text = node.innerText.replace(/\u00A0/g, " ").trim();
+      const info = getByPath(path); if (!info) return;
+      if (info.proxySet) info.proxySet(text); else info.obj[info.field] = text;
+      saveState();
+      syncEditorFromState();
+      renderPreview();
+    });
+    node.addEventListener("keydown", e => {
+      if (e.key === "Enter" && !e.shiftKey && !node.dataset.path.startsWith("personal") && !node.classList.contains("cv-summary") && !node.classList.contains("cv-item-body")){
+        e.preventDefault();
+        node.blur();
+      }
+    });
+  });
+}
+
+function syncEditorFromState(){
+  $$("[data-field]").forEach(input => {
+    const f = input.dataset.field;
+    if (input.value !== (state.personal[f] ?? "")) input.value = state.personal[f] ?? "";
+  });
+}
+
+/* ---------------- Topbar Actions ---------------- */
+$("#btn-print").addEventListener("click", async () => {
+  const btn = $("#btn-print");
+  const origHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" class="spin-icon"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1-.25 1.94-.68 2.77l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1 .25-1.94.68-2.77l-1.46-1.46C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg> Generating…`;
+
+  // Hide placeholders
+  $$(".empty-ph").forEach(n => n.textContent = "");
+
+  try {
+    const pages = $$(".cv-page");
+    if (!pages.length) { alert("Nothing to download."); return; }
+
+    // Build a temporary container with cloned pages for PDF generation
+    const container = document.createElement("div");
+    container.style.cssText = "position:absolute; left:-99999px; top:0;";
+
+    pages.forEach((page, i) => {
+      const clone = page.cloneNode(true);
+      clone.style.cssText = `
+        width: 210mm; height: 297mm;
+        box-shadow: none; margin: 0; transform: none;
+        overflow: hidden; box-sizing: border-box;
+        background: #ffffff;
+      `;
+      // Remove editable outlines/highlights
+      clone.querySelectorAll(".editable").forEach(el => {
+        el.removeAttribute("contenteditable");
+        el.style.outline = "none";
+        el.style.background = "transparent";
+      });
+      // Add page break between pages (not after the last one)
+      if (i < pages.length - 1) {
+        clone.style.pageBreakAfter = "always";
+      }
+      container.appendChild(clone);
+    });
+
+    document.body.appendChild(container);
+
+    const fileName = (state.personal.name || "cv").replace(/[^\w\d]+/g, "-").toLowerCase() + ".pdf";
+
+    await html2pdf().set({
+      margin: 0,
+      filename: fileName,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: "#ffffff",
+        logging: false,
+      },
+      jsPDF: {
+        unit: "mm",
+        format: "a4",
+        orientation: "portrait",
+      },
+      pagebreak: { mode: ["css"], avoid: [] },
+    }).from(container).save();
+
+    document.body.removeChild(container);
+
+  } catch (err) {
+    console.error("PDF generation error:", err);
+    alert("PDF generation failed: " + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = origHTML;
+    renderPreview();
+  }
+});
+
+const moreMenu = $("#more-menu");
+$("#btn-more-menu").addEventListener("click", (e) => {
+  e.stopPropagation();
+  moreMenu.classList.toggle("open");
+});
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#more-menu") && !e.target.closest("#btn-more-menu")){
+    moreMenu.classList.remove("open");
+  }
+});
+
+$("#btn-load-sample").addEventListener("click", async () => {
+  moreMenu.classList.remove("open");
+  if (state.sections.length) {
+    const confirmed = await mdConfirm({
+      title: "Load Sample CV?",
+      text: "This will replace your current CV content with the Harvard sample template.",
+      confirmText: "Load Sample",
+      icon: "question"
+    });
+    if (!confirmed) return;
+  }
+  state = sampleData();
+  openSectionIds.clear();
+  if (state.sections.length) openSectionIds.add(state.sections[0].id);
+  saveState();
+  renderEditor();
+  renderPreview();
+  await mdToast({ title: "Sample CV loaded!", icon: "success" });
+});
+
+$("#btn-clear").addEventListener("click", async () => {
+  moreMenu.classList.remove("open");
+  const confirmed = await mdConfirm({
+    title: "Clear Everything?",
+    text: "Are you sure you want to clear all fields? Your changes will be reset.",
+    confirmText: "Clear All",
+    isDanger: true,
+    icon: "warning"
+  });
+  if (!confirmed) return;
+  state = defaultData();
+  openSectionIds.clear();
+  saveState();
+  renderEditor();
+  renderPreview();
+  await mdToast({ title: "CV cleared", icon: "info" });
+});
+
+$("#btn-export-json").addEventListener("click", () => {
+  moreMenu.classList.remove("open");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: "application/json" }));
+  a.download = (state.personal.name || "cv").replace(/[^\w\d]+/g,"-").toLowerCase() + ".json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+$("#input-import-json").addEventListener("change", async (e) => {
+  moreMenu.classList.remove("open");
+  const file = e.target.files[0]; if (!file) return;
+  try {
+    const data = JSON.parse(await file.text());
+    if (!data.personal || !Array.isArray(data.sections)) throw new Error("Invalid file format");
+    state = data;
+    openSectionIds.clear();
+    if (state.sections.length) openSectionIds.add(state.sections[0].id);
+    saveState();
+    renderEditor();
+    renderPreview();
+    await mdToast({ title: "CV imported successfully!", icon: "success" });
+  } catch(err) {
+    await mdAlert({
+      title: "Import Error",
+      text: "Error importing file: " + err.message,
+      icon: "error"
+    });
+  } finally {
+    e.target.value = "";
+  }
+});
+
+/* ---------------- Zoom Controls ---------------- */
+const zoomInput = $("#zoom");
+function applyZoom(val){
+  zoomInput.value = val;
+  $("#cv").style.transform = `scale(${Number(val)/100})`;
+}
+zoomInput.addEventListener("input", e => applyZoom(e.target.value));
+$("#zoom-out-btn").addEventListener("click", () => applyZoom(Math.max(50, Number(zoomInput.value) - 10)));
+$("#zoom-in-btn").addEventListener("click", () => applyZoom(Math.min(130, Number(zoomInput.value) + 10)));
+$("#zoom-fit-btn").addEventListener("click", () => applyZoom(85));
+
+/* ---------------- Sidebar Drawer & Backdrop ---------------- */
+const toggleBtn = $("#btn-toggle-sidebar");
+const backdrop  = $("#sidebar-backdrop");
+function setSidebarOpen(open){
+  document.body.classList.toggle("sidebar-collapsed", !open);
+}
+toggleBtn.addEventListener("click", () => setSidebarOpen(document.body.classList.contains("sidebar-collapsed")));
+backdrop.addEventListener("click", () => setSidebarOpen(false));
+
+/* ---------------- Navigation Tabs ---------------- */
+$$('.md3-tab').forEach(btn => {
+  btn.onclick = () => {
+    $$('.md3-tab').forEach(b => b.classList.remove('active'));
+    $$('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  };
+});
+
+/* ---------------- Profiles UI ---------------- */
+function renderProfileUI() {
+  const sel = $('#profile-select');
+  sel.innerHTML = '';
+  Object.values(profilesData.profiles).forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    opt.textContent = p.name;
+    if (p.id === profilesData.activeId) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  if ($('#topbar-profile-name')) {
+    $('#topbar-profile-name').textContent = profilesData.profiles[profilesData.activeId]?.name || 'My CV';
+  }
+}
+
+$('#profile-select').addEventListener('change', (e) => {
+  profilesData.activeId = e.target.value;
+  state = profilesData.profiles[profilesData.activeId].data;
+  openSectionIds.clear();
+  if (state.sections.length) openSectionIds.add(state.sections[0].id);
+  renderProfileUI();
+  renderEditor();
+  renderPreview();
+});
+
+$('#topbar-profile-btn').addEventListener('click', () => {
+  // Switch to Profiles & Region tab
+  $$('.md3-tab').forEach(b => b.classList.remove('active'));
+  $$('.tab-content').forEach(c => c.classList.remove('active'));
+  const targetTab = $('[data-tab="tab-settings"]');
+  targetTab.classList.add('active');
+  $('#tab-settings').classList.add('active');
+  if (document.body.classList.contains("sidebar-collapsed")) setSidebarOpen(true);
+});
+
+$('#btn-profile-new').addEventListener('click', async () => {
+  const name = await mdPrompt({
+    title: "New CV Profile",
+    text: "Enter a name for this CV profile (e.g. Software Role, Academic CV):",
+    inputValue: "New Role CV",
+    inputPlaceholder: "Profile name",
+    confirmText: "Create Profile"
+  });
+  if (!name || !name.trim()) return;
+  const id = uid();
+  profilesData.profiles[id] = { id, name: name.trim(), data: defaultData() };
+  profilesData.activeId = id;
+  state = profilesData.profiles[id].data;
+  openSectionIds.clear();
+  renderProfileUI();
+  renderEditor();
+  renderPreview();
+  saveState();
+  await mdToast({ title: `Created profile "${name.trim()}"`, icon: "success" });
+});
+
+$('#btn-profile-dup').addEventListener('click', async () => {
+  const curName = profilesData.profiles[profilesData.activeId]?.name || "My CV";
+  const name = await mdPrompt({
+    title: "Duplicate Profile",
+    text: "Enter a name for the duplicated CV profile:",
+    inputValue: curName + " (Copy)",
+    inputPlaceholder: "Profile name",
+    confirmText: "Duplicate"
+  });
+  if (!name || !name.trim()) return;
+  const id = uid();
+  profilesData.profiles[id] = { id, name: name.trim(), data: deepClone(state) };
+  profilesData.activeId = id;
+  state = profilesData.profiles[id].data;
+  openSectionIds.clear();
+  if (state.sections.length) openSectionIds.add(state.sections[0].id);
+  renderProfileUI();
+  renderEditor();
+  renderPreview();
+  saveState();
+  await mdToast({ title: `Duplicated as "${name.trim()}"`, icon: "success" });
+});
+
+$('#btn-profile-rename').addEventListener('click', async () => {
+  const cur = profilesData.profiles[profilesData.activeId];
+  if (!cur) return;
+  const name = await mdPrompt({
+    title: "Rename Profile",
+    text: "Enter new name for this profile:",
+    inputValue: cur.name,
+    inputPlaceholder: "Profile name",
+    confirmText: "Rename"
+  });
+  if (!name || !name.trim() || name.trim() === cur.name) return;
+  cur.name = name.trim();
+  renderProfileUI();
+  saveState();
+  await mdToast({ title: `Renamed to "${name.trim()}"`, icon: "success" });
+});
+
+$('#btn-profile-del').addEventListener('click', async () => {
+  if (Object.keys(profilesData.profiles).length <= 1) {
+    return await mdAlert({
+      title: "Cannot Delete",
+      text: "Cannot delete your only CV profile. Create another profile first.",
+      icon: "info"
+    });
+  }
+  const curName = profilesData.profiles[profilesData.activeId]?.name || "this profile";
+  const confirmed = await mdConfirm({
+    title: "Delete CV Profile?",
+    text: `Are you sure you want to delete profile "${curName}"? This action cannot be undone.`,
+    confirmText: "Delete Profile",
+    isDanger: true,
+    icon: "warning"
+  });
+  if (confirmed) {
+    delete profilesData.profiles[profilesData.activeId];
+    profilesData.activeId = Object.keys(profilesData.profiles)[0];
+    state = profilesData.profiles[profilesData.activeId].data;
+    openSectionIds.clear();
+    if (state.sections.length) openSectionIds.add(state.sections[0].id);
+    renderProfileUI();
+    renderEditor();
+    renderPreview();
+    saveState();
+    await mdToast({ title: `Deleted profile "${curName}"`, icon: "info" });
+  }
+});
+renderProfileUI();
+
+/* ---------------- Floating Selection Toolbar ---------------- */
+const fToolbar = $('#floating-toolbar');
+document.addEventListener('selectionchange', () => {
+  const sel = window.getSelection();
+  if (!sel.rangeCount || sel.isCollapsed) return fToolbar.style.display = 'none';
+  let node = sel.anchorNode;
+  let inCv = false;
+  while (node && node !== document.body) {
+    if (node.id === 'cv') { inCv = true; break; }
+    node = node.parentNode;
+  }
+  if (!inCv) return fToolbar.style.display = 'none';
+
+  // Smart Bold Suppression on already-bold elements
+  const isAlreadyBold = sel.anchorNode?.parentElement?.closest('.cv-name, .cv-section-head, .cv-item-title-row, .cv-item-title, .cv-item-head, .k');
+  $('#ft-bold').style.display = isAlreadyBold ? 'none' : 'inline-block';
+
+  const rect = sel.getRangeAt(0).getBoundingClientRect();
+  fToolbar.style.display = 'flex';
+  fToolbar.style.top = (rect.top + window.scrollY - 40) + 'px';
+  fToolbar.style.left = (rect.left + window.scrollX + (rect.width / 2) - (fToolbar.offsetWidth / 2)) + 'px';
+});
+
+$('#ft-bold').addEventListener('mousedown', (e) => { e.preventDefault(); document.execCommand('bold', false, null); });
+$('#ft-italic').addEventListener('mousedown', (e) => { e.preventDefault(); document.execCommand('italic', false, null); });
+$('#ft-underline').addEventListener('mousedown', (e) => { e.preventDefault(); document.execCommand('underline', false, null); });
+
+/* ---------------- ATS & Bullet Strength Audit ---------------- */
+function checkBullets() {
+  const warnings = [];
+  $$('.cv-item-body').forEach(el => {
+    const t = el.innerText.trim();
+    if (!t) return;
+    t.split('\n').forEach(line => {
+      line = line.trim();
+      if (line.startsWith('•')) {
+        const c = line.substring(1).trim();
+        if (/^(I |Responsible for|Helped|Worked|Assisted|Handled|Did)/i.test(c)) {
+          warnings.push({ type: 'weak', text: c, reason: 'Weak opening verb (avoid "I", "Responsible for", "Helped")' });
+        }
+        if (!/\d/.test(c)) {
+          warnings.push({ type: 'metrics', text: c, reason: 'Missing quantifiable metrics or numbers (e.g. 20%, 5+)' });
+        }
+      }
+    });
+  });
+
+  const content = $('#bullet-audit-content');
+  const badge = $('#tools-badge');
+
+  if (warnings.length > 0) {
+    badge.style.display = 'block';
+    badge.textContent = warnings.length;
+    content.innerHTML = `
+      <div class="audit-card audit-card-warning">
+        <div class="audit-card-title">
+          <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+          <span>${warnings.length} Bullet Improvements Suggested</span>
+        </div>
+        <ul class="audit-list">
+          ${warnings.map(w => `<li><b>${w.reason}:</b> "${w.text.substring(0, 45)}..."</li>`).join('')}
+        </ul>
+      </div>`;
+  } else {
+    badge.style.display = 'none';
+    content.innerHTML = `
+      <div class="audit-card audit-card-success">
+        <div class="audit-card-title">
+          <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          <span>Looking Strong!</span>
+        </div>
+        <p style="font-size:13px; line-height:1.4;">All bullet points begin with strong action verbs and include metrics.</p>
+      </div>`;
+  }
+}
+setTimeout(checkBullets, 500);
+
+/* ---------------- Job Description Matcher ---------------- */
+$('#btn-jd-match').addEventListener('click', () => {
+  const jdText = $('#jd-input').value.toLowerCase();
+  const cvText = $('#cv').innerText.toLowerCase();
+  if (!jdText.trim()) return;
+
+  const stopWords = new Set(["this","that","with","from","your","have","will","what","when","where","they","their","about","which","there","should","would","could","these","those"]);
+  let words = [...new Set((jdText.match(/[a-z]+/g) || []).filter(w => w.length > 3 && !stopWords.has(w)))];
+  
+  let matchCount = 0;
+  const container = $('#jd-chips-container');
+  container.innerHTML = '';
+
+  words.forEach(w => {
+    const has = cvText.includes(w);
+    if (has) matchCount++;
+    const chip = document.createElement('span');
+    chip.className = 'jd-chip ' + (has ? 'chip-green' : 'chip-red');
+    chip.innerHTML = (has ? '<svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;vertical-align:-2px;margin-right:4px;"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>' : '<span style="font-weight:700;margin-right:4px;">+</span>') + w;
+    container.appendChild(chip);
+  });
+
+  const pct = words.length ? Math.round((matchCount / words.length) * 100) : 0;
+  $('#jd-score').textContent = `${pct}% Keyword Match (${matchCount} of ${words.length} terms found in CV)`;
+});
+
+/* ---------------- Region Checklist ---------------- */
+function updateChecklist() {
+  const val = $('#region-select').value;
+  $('#checklist-items').innerHTML = val === 'us'
+    ? `<li class="checklist-item"><span class="checklist-badge badge-skip">Skip</span><div><b>Photo:</b> Do not include a photo (prevents discrimination claims in US/UK/EU).</div></li>
+       <li class="checklist-item"><span class="checklist-badge badge-skip">Skip</span><div><b>Date of Birth & Nationality:</b> Omit to comply with equal opportunity hiring laws.</div></li>
+       <li class="checklist-item"><span class="checklist-badge badge-info">1 Page</span><div><b>Length:</b> Standard Harvard format is strictly 1 single page for &lt; 5 years exp.</div></li>
+       <li class="checklist-item"><span class="checklist-badge badge-include">ATS</span><div><b>Formatting:</b> Single column, standard font, no graphics — 100% ATS parseable.</div></li>`
+    : `<li class="checklist-item"><span class="checklist-badge badge-include">Expected</span><div><b>Photo:</b> Standard and expected for corporate roles in Gulf and South Asia.</div></li>
+       <li class="checklist-item"><span class="checklist-badge badge-include">Expected</span><div><b>Date of Birth & Nationality:</b> Often mandatory for visa processing and HR verification.</div></li>
+       <li class="checklist-item"><span class="checklist-badge badge-info">1-2 Pages</span><div><b>Length:</b> 2 pages is common and widely accepted for detailed work histories.</div></li>`;
+}
+
+$('#seg-reg-us').addEventListener('click', () => {
+  $('#seg-reg-us').classList.add('active');
+  $('#seg-reg-asia').classList.remove('active');
+  $('#region-select').value = 'us';
+  updateChecklist();
+});
+
+$('#seg-reg-asia').addEventListener('click', () => {
+  $('#seg-reg-asia').classList.add('active');
+  $('#seg-reg-us').classList.remove('active');
+  $('#region-select').value = 'asia';
+  updateChecklist();
+});
+
+updateChecklist();
+
+/* ---------------- Initialize ---------------- */
+renderEditor();
+renderPreview();
+</script>
+</body>
+</html>
